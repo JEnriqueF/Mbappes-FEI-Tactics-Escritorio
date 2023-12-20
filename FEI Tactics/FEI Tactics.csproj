@@ -56,63 +56,74 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APIClient.cs" />
-    <Compile Include="Configuración.cs">
+    <Compile Include="Forms\RegistroCuenta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Configuración.Designer.cs">
+    <Compile Include="Forms\RegistroCuenta.Designer.cs">
+      <DependentUpon>RegistroCuenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FotoPerfil.cs" />
+    <Compile Include="Services\JugadorService.cs" />
+    <Compile Include="Forms\Configuración.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Configuración.Designer.cs">
       <DependentUpon>Configuración.cs</DependentUpon>
     </Compile>
-    <Compile Include="InicioSesion.cs">
+    <Compile Include="Forms\InicioSesion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InicioSesion.Designer.cs">
+    <Compile Include="Forms\InicioSesion.Designer.cs">
       <DependentUpon>InicioSesion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Jugador.cs" />
-    <Compile Include="Mazo.cs">
+    <Compile Include="Models\Jugador.cs" />
+    <Compile Include="Forms\Mazo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Mazo.Designer.cs">
+    <Compile Include="Forms\Mazo.Designer.cs">
       <DependentUpon>Mazo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menu.cs">
+    <Compile Include="Forms\Menu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menu.Designer.cs">
+    <Compile Include="Forms\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuPrincipal.cs">
+    <Compile Include="Forms\MenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuPrincipal.Designer.cs">
+    <Compile Include="Forms\MenuPrincipal.Designer.cs">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Perfil.cs">
+    <Compile Include="Forms\Perfil.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Perfil.Designer.cs">
+    <Compile Include="Forms\Perfil.Designer.cs">
       <DependentUpon>Perfil.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Configuración.resx">
+    <Compile Include="Utilities\Mensaje.cs" />
+    <EmbeddedResource Include="Forms\Configuración.resx">
       <DependentUpon>Configuración.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InicioSesion.resx">
+    <EmbeddedResource Include="Forms\InicioSesion.resx">
       <DependentUpon>InicioSesion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Mazo.resx">
+    <EmbeddedResource Include="Forms\Mazo.resx">
       <DependentUpon>Mazo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menu.resx">
+    <EmbeddedResource Include="Forms\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuPrincipal.resx">
+    <EmbeddedResource Include="Forms\MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Perfil.resx">
+    <EmbeddedResource Include="Forms\Perfil.resx">
       <DependentUpon>Perfil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RegistroCuenta.resx">
+      <DependentUpon>RegistroCuenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -137,5 +148,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

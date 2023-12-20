@@ -9,7 +9,7 @@ namespace FEI_Tactics
     public class Jugador
     {
         private string Gamertag { get; set; }
-        private string contrasenia { get; set; }
+        private string Contrasenia { get; set; }
         private int PartidasGanadas { get; set; }
         private int PartidasPerdidas { get; set; }
         private string Mazo { get; set; }
@@ -18,11 +18,15 @@ namespace FEI_Tactics
         public Jugador(string gamertag, string contrasenia, int partidasGanadas, int partidasPerdidas, string mazo, int idFoto)
         {
             Gamertag = gamertag;
-            this.contrasenia = contrasenia;
+            this.Contrasenia = contrasenia;
             PartidasGanadas = partidasGanadas;
             PartidasPerdidas = partidasPerdidas;
             Mazo = mazo;
             IdFoto = idFoto;
+        }
+
+        public Jugador()
+        {
         }
     }
 }

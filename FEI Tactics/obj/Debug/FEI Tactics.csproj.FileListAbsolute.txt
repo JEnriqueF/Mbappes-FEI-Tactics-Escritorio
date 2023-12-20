@@ -1,19 +1,21 @@
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\bin\Debug\FEI Tactics.exe.config
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\bin\Debug\FEI Tactics.exe
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\bin\Debug\FEI Tactics.pdb
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\bin\Debug\Newtonsoft.Json.dll
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\bin\Debug\Newtonsoft.Json.xml
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI Tactics.csproj.AssemblyReference.cache
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI_Tactics.InicioSesion.resources
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI_Tactics.Properties.Resources.resources
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI Tactics.csproj.GenerateResource.cache
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI Tactics.csproj.CoreCompileInputs.cache
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI Tactics.csproj.CopyComplete
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI Tactics.exe
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI Tactics.pdb
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\bin\Debug\FontAwesome.Sharp.dll
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI_Tactics.Configuración.resources
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI_Tactics.Mazo.resources
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI_Tactics.Menu.resources
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI_Tactics.MenuPrincipal.resources
-C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\FEI Tactics\obj\Debug\FEI_Tactics.Perfil.resources
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\bin\Debug\FEI Tactics.exe.config
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\bin\Debug\FEI Tactics.exe
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\bin\Debug\FEI Tactics.pdb
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\bin\Debug\FontAwesome.Sharp.dll
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\bin\Debug\Newtonsoft.Json.dll
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\bin\Debug\Newtonsoft.Json.xml
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.csproj.AssemblyReference.cache
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.csproj.SuggestedBindingRedirects.cache
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI_Tactics.Configuración.resources
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI_Tactics.InicioSesion.resources
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI_Tactics.Mazo.resources
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI_Tactics.Menu.resources
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI_Tactics.MenuPrincipal.resources
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI_Tactics.Perfil.resources
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI_Tactics.Forms.RegistroCuenta.resources
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI_Tactics.Properties.Resources.resources
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.csproj.GenerateResource.cache
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.csproj.CoreCompileInputs.cache
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.csproj.CopyComplete
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.exe
+D:\Periodo_7\my_apps\FEITactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.pdb
