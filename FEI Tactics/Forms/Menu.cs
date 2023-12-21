@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,9 +17,12 @@ namespace FEI_Tactics
     {
         private IconMenuItem menuActivo = null;
         private Form formularioActivo = null;
+        SoundPlayer player;
 
         public Menu()
         {
+            player = new SoundPlayer("C:\\Users\\LENOVO\\Documents\\Desarrollo de sistemas en red\\FEI Tactics Escritorio\\FEI Tactics\\Mbappes-FEI-Tactics-Escritorio\\FEI Tactics\\Forms\\musica_fei_tactics.wav");
+            player.PlayLooping();
             InitializeComponent();
         }
 
@@ -59,7 +64,7 @@ namespace FEI_Tactics
 
         private void configuracion(object sender, EventArgs e)
         {
-            abrirForm((IconMenuItem)sender, new Configuración());
+            abrirForm((IconMenuItem)sender, new Configuración(player));
         }
     }
 }

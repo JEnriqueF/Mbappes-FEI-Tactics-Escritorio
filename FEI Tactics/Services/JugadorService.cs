@@ -17,7 +17,7 @@ namespace FEI_Tactics
 {
     public static class JugadorService
     {
-        private const string URL_API = "https://t1r3msw0-3000.usw3.devtunnels.ms/";
+        private const string URL_API = "https://18n4qv9q-3000.usw3.devtunnels.ms/";
 
         public static async Task<Jugador> AutenticarInicioSesionAsync(string gamertag, string password)
         {

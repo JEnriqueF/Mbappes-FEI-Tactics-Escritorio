@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cbSonido = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
@@ -44,16 +44,17 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Configuración";
             // 
-            // checkBox1
+            // cbSonido
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(202, 210);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(166, 29);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Sonido general";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbSonido.AutoSize = true;
+            this.cbSonido.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbSonido.Location = new System.Drawing.Point(202, 210);
+            this.cbSonido.Name = "cbSonido";
+            this.cbSonido.Size = new System.Drawing.Size(166, 29);
+            this.cbSonido.TabIndex = 2;
+            this.cbSonido.Text = "Sonido general";
+            this.cbSonido.UseVisualStyleBackColor = true;
+            this.cbSonido.CheckedChanged += new System.EventHandler(this.controlSonido);
             // 
             // checkBox2
             // 
@@ -84,7 +85,7 @@
             this.ClientSize = new System.Drawing.Size(600, 658);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.cbSonido);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Configuración";
@@ -96,7 +97,7 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cbSonido;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
     }
