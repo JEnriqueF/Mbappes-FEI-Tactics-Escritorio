@@ -1,4 +1,5 @@
-﻿using FEI_Tactics.Utilities;
+﻿using FEI_Tactics.Models;
+using FEI_Tactics.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -72,10 +73,19 @@ namespace FEI_Tactics
             }
             try
             {
-                Jugador sesionJugadorActual = await JugadorService.AutenticarInicioSesionAsync(tbGamertag.Text, tbContrasenia.Text);
+                JugadorResponse sesionJugadorActual = await JugadorService.AutenticarInicioSesionAsync(tbGamertag.Text, tbContrasenia.Text);
 
                 if (sesionJugadorActual != null)
                 {
+                    Jugador.Inicializar(
+                        sesionJugadorActual.Gamertag,
+                        sesionJugadorActual.Contrasenia,
+                        sesionJugadorActual.PartidasGanadas,
+                        sesionJugadorActual.PartidasPerdidas,
+                        sesionJugadorActual.Mazo,
+                        sesionJugadorActual.IdFoto
+                    );
+
                     Menu menu = new Menu();
                     menu.Show();
                     this.Hide();

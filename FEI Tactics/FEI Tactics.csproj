@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="Models\FotoPerfil.cs" />
     <Compile Include="Models\FotoPerfilInfo.cs" />
+    <Compile Include="Models\JugadorResponse.cs" />
     <Compile Include="Services\JugadorService.cs" />
     <Compile Include="Forms\Configuración.cs">
       <SubType>Form</SubType>

@@ -19,9 +19,10 @@ namespace FEI_Tactics
     {
         private const string URL_API = "https://mk2m8b3x-3000.usw3.devtunnels.ms/";
 
-        public static async Task<Jugador> AutenticarInicioSesionAsync(string gamertag, string password)
+        public static async Task<JugadorResponse> AutenticarInicioSesionAsync(string gamertag, string password)
         {
-            Jugador jugadorActual = new Jugador();
+            JugadorResponse jugadorActual = new JugadorResponse();
+
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -37,7 +38,7 @@ namespace FEI_Tactics
                     if (response.IsSuccessStatusCode)
                     {
                         string responseJson = await response.Content.ReadAsStringAsync();
-                        jugadorActual = JsonConvert.DeserializeObject<Jugador>(responseJson);
+                        jugadorActual = JsonConvert.DeserializeObject<JugadorResponse>(responseJson);
                     } else if (response.StatusCode == HttpStatusCode.NotFound)
                     {
                         jugadorActual = null;

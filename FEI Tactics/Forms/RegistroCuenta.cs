@@ -161,6 +161,8 @@ namespace FEI_Tactics.Forms
                     }
                     catch (Exception ex)
                     {
+                        tbGamertag.Text = "";
+                        tbPassword.Text = "";
                         Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
                     }
                 }
