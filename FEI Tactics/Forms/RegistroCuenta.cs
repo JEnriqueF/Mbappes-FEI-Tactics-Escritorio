@@ -15,13 +15,19 @@ namespace FEI_Tactics.Forms
 {
     public partial class RegistroCuenta : Form
     {
-        private List<FotoPerfil> fotosPerfil;
+        private List<FotoPerfilInfo> fotosPerfilInfo;
+        private int indiceImagenActual;
         public RegistroCuenta()
         {
             InitializeComponent();
-            configurarDataGridView();
             personalizarDiseñoForm();
-            cargarFotosPerfil();
+
+            RecuperarFotosPerfilInfoAsync().ContinueWith(t =>
+            {
+                CargarImagenes();
+                buttonCambiarFoto.Enabled = true;
+                buttonRegistrar.Enabled = true;
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void personalizarDiseñoForm()
@@ -55,23 +61,13 @@ namespace FEI_Tactics.Forms
             buttonRegistrar.FlatAppearance.BorderSize = 0;
             buttonRegistrar.BackColor = Color.Green;
             buttonRegistrar.ForeColor = Color.White;
-            //verificarImagenCargada();
-        }
-
-        private void configurarDataGridView()
-        {
-            dgFotosPerfil.AutoGenerateColumns = false;
-            //dgFotosPerfil.AllowUserToAddRows = false;
-            dgFotosPerfil.RowTemplate.Height = 100;
-
-            // Columna para la imagen
-            DataGridViewImageColumn imagenColumn = new DataGridViewImageColumn();
-            imagenColumn.Width = 344;
-            imagenColumn.DataPropertyName = "Foto";
-            imagenColumn.Name = "Imagen";
-            imagenColumn.HeaderText = "Imagen";
-            imagenColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            dgFotosPerfil.Columns.Add(imagenColumn);
+            buttonCambiarFoto.FlatStyle = FlatStyle.Flat;
+            buttonCambiarFoto.FlatAppearance.BorderSize = 0;
+            buttonCambiarFoto.BackColor = Color.Green;
+            buttonCambiarFoto.ForeColor = Color.White;
+            //PictureBox
+            pbFotoPerfil.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbFotoPerfil.BackColor = Color.Transparent;
         }
 
         private void buttonRegresar_Click(object sender, EventArgs e)
@@ -93,71 +89,87 @@ namespace FEI_Tactics.Forms
             }
         }
 
-        private async void cargarFotosPerfil()
+        public async Task RecuperarFotosPerfilInfoAsync()
         {
             try
             {
-                fotosPerfil = await JugadorService.RecuperarFotosPerfilAsync();
+                List<FotoPerfil> fotosPerfil = await JugadorService.RecuperarFotosPerfilAsync();
+                fotosPerfilInfo = new List<FotoPerfilInfo>();
 
-                dgFotosPerfil.Rows.Clear();
-
-                if (fotosPerfil != null && fotosPerfil.Count > 0)
+                foreach (var fotoPerfil in fotosPerfil)
                 {
-                    foreach (var fotoPerfil in fotosPerfil)
+                    Image image = ConvertidorImagen.DeBase64AImagen(fotoPerfil.Foto);
+                    fotosPerfilInfo.Add(new FotoPerfilInfo(fotoPerfil.IDFoto, image));
+                }
+            }catch(Exception ex)
+            {
+                Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
+            }
+        }
+
+        public void CargarImagenes()
+        {
+            if (fotosPerfilInfo != null && fotosPerfilInfo.Count > 0)
+            {
+                pbFotoPerfil.Image = fotosPerfilInfo[0].Foto;
+                indiceImagenActual = 0;
+            }
+            else
+            {
+                Label labelSinContenido = new Label();
+                labelSinContenido.Text = "Sin contenido.";
+                labelSinContenido.ForeColor = Color.Red;
+                labelSinContenido.BackColor = Color.Transparent;
+                labelSinContenido.Location = new Point(pbFotoPerfil.Width / 2 - labelSinContenido.Width / 2, pbFotoPerfil.Height / 2 - labelSinContenido.Height / 2);
+                pbFotoPerfil.Controls.Add(labelSinContenido);
+            }
+        }
+
+        private void buttonCambiarFoto_Click(object sender, EventArgs e)
+        {
+            indiceImagenActual++;
+            if (indiceImagenActual >= fotosPerfilInfo.Count)
+            {
+                indiceImagenActual = 0;
+            }
+            pbFotoPerfil.Image = fotosPerfilInfo[indiceImagenActual].Foto;
+        }
+
+        private async void buttonRegistrar_Click(object sender, EventArgs e)
+        {
+            if (!(tbGamertag.Text.Trim().Equals("")) && !(tbPassword.Text.Trim().Equals("")))
+            {
+                if (Mensaje.MostrarMensajeConfirmacion())
+                {
+                    try
                     {
-                        try
+                        int idFoto = fotosPerfilInfo[indiceImagenActual].IDFoto;
+                        Boolean registroExitoso = await JugadorService.RegistrarCuentaJugadorAsync(tbGamertag.Text.Trim(), tbPassword.Text.Trim(), idFoto);
+
+                        if (registroExitoso)
                         {
-                            if (IsValidBase64String(fotoPerfil.Foto))
-                            {
-                                byte[] imagenBytes = Convert.FromBase64String(fotoPerfil.Foto);
-
-                                using (MemoryStream ms = new MemoryStream(imagenBytes))
-                                {
-                                    Image imagen = Image.FromStream(ms);
-
-                                    DataGridViewRow row = (DataGridViewRow)dgFotosPerfil.Rows[0].Clone();
-                                    row.Cells[0].Value = fotoPerfil.IDFoto;
-                                    row.Cells[1].Value = imagen;
-                                    dgFotosPerfil.Rows.Add(row);
-                                }
-                            }
-                            else
-                            {
-                                Mensaje.MostrarMensaje($"La cadena base64 para ID {fotoPerfil.IDFoto} no es válida.", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
-                            }
+                            Mensaje.MostrarMensaje("El jugador se registró correctamente", "Registro exitoso", MessageBoxIcon.Information);
+                            tbGamertag.Text = "";
+                            tbPassword.Text = "";
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            Mensaje.MostrarMensaje($"Error al procesar la imagen para ID {fotoPerfil.IDFoto}: {ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
+                            Mensaje.MostrarMensaje("El jugador no pudo ser registrado. Intente en otro momento.", "Registro incorrecto", MessageBoxIcon.Error);
+                            tbGamertag.Text = "";
+                            tbPassword.Text = "";
                         }
                     }
-                }
-                else
-                {
-                    Label labelSinContenido = new Label();
-                    labelSinContenido.Text = "Sin contenido.";
-                    labelSinContenido.ForeColor = Color.Red;
-                    labelSinContenido.Location = new Point(dgFotosPerfil.Width / 2 - labelSinContenido.Width / 2, dgFotosPerfil.Height / 2 - labelSinContenido.Height / 2);
-                    dgFotosPerfil.Controls.Add(labelSinContenido);
+                    catch (Exception ex)
+                    {
+                        Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
+                    }
                 }
             }
-            catch (Exception except)
+            else
             {
-                Mensaje.MostrarMensaje($"{except.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
+                Mensaje.MostrarMensajeErrorCampos();
             }
         }
 
-        private bool IsValidBase64String(string base64String)
-        {
-            try
-            {
-                Convert.FromBase64String(base64String);
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
     }
 }

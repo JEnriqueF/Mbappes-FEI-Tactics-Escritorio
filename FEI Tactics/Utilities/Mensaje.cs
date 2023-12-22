@@ -15,11 +15,12 @@ namespace FEI_Tactics.Utilities
         }
         public static Boolean MostrarMensajeConfirmacionRegresar()
         {
-            return MostrarMensajeConfirmacion("¿Está seguro de querer regresar? Si lo hace los datos ingresados se perderán.", "Regresar");
+            DialogResult resultado = MessageBox.Show("¿Está seguro de querer regresar? Si lo hace los datos ingresados se perderán.", "Regresar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return (resultado == DialogResult.Yes);
         }
-        public static Boolean MostrarMensajeConfirmacion(string mensaje, string titulo)
+        public static Boolean MostrarMensajeConfirmacion()
         {
-            DialogResult resultado = MessageBox.Show(mensaje, titulo, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult resultado = MessageBox.Show("¿Está seguro de querer continuar?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return (resultado == DialogResult.Yes);
         }
 

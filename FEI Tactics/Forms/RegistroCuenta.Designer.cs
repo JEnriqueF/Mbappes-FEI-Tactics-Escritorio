@@ -36,8 +36,9 @@
             this.buttonRegresar = new System.Windows.Forms.Button();
             this.buttonRegistrar = new System.Windows.Forms.Button();
             this.labelSelecFotoPerfil = new System.Windows.Forms.Label();
-            this.dgFotosPerfil = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dgFotosPerfil)).BeginInit();
+            this.pbFotoPerfil = new System.Windows.Forms.PictureBox();
+            this.buttonCambiarFoto = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFotoPerfil)).BeginInit();
             this.SuspendLayout();
             // 
             // labelTitulo
@@ -70,16 +71,17 @@
             // 
             // tbGamertag
             // 
-            this.tbGamertag.Location = new System.Drawing.Point(292, 75);
+            this.tbGamertag.Location = new System.Drawing.Point(351, 75);
             this.tbGamertag.Name = "tbGamertag";
-            this.tbGamertag.Size = new System.Drawing.Size(373, 22);
+            this.tbGamertag.Size = new System.Drawing.Size(314, 22);
             this.tbGamertag.TabIndex = 3;
             // 
             // tbPassword
             // 
-            this.tbPassword.Location = new System.Drawing.Point(292, 124);
+            this.tbPassword.Location = new System.Drawing.Point(351, 124);
             this.tbPassword.Name = "tbPassword";
-            this.tbPassword.Size = new System.Drawing.Size(373, 22);
+            this.tbPassword.PasswordChar = '*';
+            this.tbPassword.Size = new System.Drawing.Size(314, 22);
             this.tbPassword.TabIndex = 4;
             // 
             // buttonRegresar
@@ -96,12 +98,14 @@
             // buttonRegistrar
             // 
             this.buttonRegistrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonRegistrar.Enabled = false;
             this.buttonRegistrar.Location = new System.Drawing.Point(592, 406);
             this.buttonRegistrar.Name = "buttonRegistrar";
             this.buttonRegistrar.Size = new System.Drawing.Size(95, 32);
             this.buttonRegistrar.TabIndex = 6;
             this.buttonRegistrar.Text = "Registrar";
             this.buttonRegistrar.UseVisualStyleBackColor = true;
+            this.buttonRegistrar.Click += new System.EventHandler(this.buttonRegistrar_Click);
             // 
             // labelSelecFotoPerfil
             // 
@@ -112,22 +116,33 @@
             this.labelSelecFotoPerfil.TabIndex = 9;
             this.labelSelecFotoPerfil.Text = "Seleccione su foto de perfil:";
             // 
-            // dgFotosPerfil
+            // pbFotoPerfil
             // 
-            this.dgFotosPerfil.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFotosPerfil.Location = new System.Drawing.Point(136, 226);
-            this.dgFotosPerfil.Name = "dgFotosPerfil";
-            this.dgFotosPerfil.RowHeadersWidth = 51;
-            this.dgFotosPerfil.RowTemplate.Height = 24;
-            this.dgFotosPerfil.Size = new System.Drawing.Size(529, 150);
-            this.dgFotosPerfil.TabIndex = 12;
+            this.pbFotoPerfil.Location = new System.Drawing.Point(351, 176);
+            this.pbFotoPerfil.Name = "pbFotoPerfil";
+            this.pbFotoPerfil.Size = new System.Drawing.Size(314, 197);
+            this.pbFotoPerfil.TabIndex = 10;
+            this.pbFotoPerfil.TabStop = false;
+            // 
+            // buttonCambiarFoto
+            // 
+            this.buttonCambiarFoto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonCambiarFoto.Enabled = false;
+            this.buttonCambiarFoto.Location = new System.Drawing.Point(136, 226);
+            this.buttonCambiarFoto.Name = "buttonCambiarFoto";
+            this.buttonCambiarFoto.Size = new System.Drawing.Size(168, 23);
+            this.buttonCambiarFoto.TabIndex = 11;
+            this.buttonCambiarFoto.Text = "Cambiar foto";
+            this.buttonCambiarFoto.UseVisualStyleBackColor = true;
+            this.buttonCambiarFoto.Click += new System.EventHandler(this.buttonCambiarFoto_Click);
             // 
             // RegistroCuenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dgFotosPerfil);
+            this.Controls.Add(this.buttonCambiarFoto);
+            this.Controls.Add(this.pbFotoPerfil);
             this.Controls.Add(this.labelSelecFotoPerfil);
             this.Controls.Add(this.buttonRegistrar);
             this.Controls.Add(this.buttonRegresar);
@@ -139,7 +154,7 @@
             this.Name = "RegistroCuenta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RegistroCuenta";
-            ((System.ComponentModel.ISupportInitialize)(this.dgFotosPerfil)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFotoPerfil)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,6 +170,7 @@
         private System.Windows.Forms.Button buttonRegresar;
         private System.Windows.Forms.Button buttonRegistrar;
         private System.Windows.Forms.Label labelSelecFotoPerfil;
-        private System.Windows.Forms.DataGridView dgFotosPerfil;
+        private System.Windows.Forms.PictureBox pbFotoPerfil;
+        private System.Windows.Forms.Button buttonCambiarFoto;
     }
 }
