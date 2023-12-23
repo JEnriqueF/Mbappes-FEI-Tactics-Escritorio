@@ -1,4 +1,5 @@
 ﻿using FEI_Tactics.Models;
+using FEI_Tactics.Services;
 using FEI_Tactics.Utilities;
 using System;
 using System.Collections.Generic;
@@ -74,9 +75,26 @@ namespace FEI_Tactics
             try
             {
                 JugadorResponse sesionJugadorActual = await JugadorService.AutenticarInicioSesionAsync(tbGamertag.Text, tbContrasenia.Text);
+                List<CartaResponse> mazoJugador = await CartasService.RecuperarMazoAsync();
 
                 if (sesionJugadorActual != null)
                 {
+                    if(mazoJugador == null)
+                    {
+                        Mensaje.MostrarMensaje("No existen cartas registradas en el juego.", "Error", MessageBoxIcon.Error);
+                        return;
+                    } else
+                    {
+                        foreach(CartaResponse ma in mazoJugador){
+                            Carta.Inicializar(
+                                ma.IDCarta,
+                                ma.Costo,
+                                ma.Poder,
+                                ma.Imagen
+                            );
+                        }
+                    }
+
                     Jugador.Inicializar(
                         sesionJugadorActual.Gamertag,
                         sesionJugadorActual.Contrasenia,

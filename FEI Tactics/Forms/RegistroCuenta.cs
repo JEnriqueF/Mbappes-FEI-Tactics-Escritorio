@@ -15,7 +15,7 @@ namespace FEI_Tactics.Forms
 {
     public partial class RegistroCuenta : Form
     {
-        private List<FotoPerfilInfo> fotosPerfilInfo;
+        private List<FotoPerfilResponse> fotosPerfilInfo;
         private int indiceImagenActual;
         public RegistroCuenta()
         {
@@ -94,12 +94,12 @@ namespace FEI_Tactics.Forms
             try
             {
                 List<FotoPerfil> fotosPerfil = await JugadorService.RecuperarFotosPerfilAsync();
-                fotosPerfilInfo = new List<FotoPerfilInfo>();
+                fotosPerfilInfo = new List<FotoPerfilResponse>();
 
                 foreach (var fotoPerfil in fotosPerfil)
                 {
                     Image image = ConvertidorImagen.DeBase64AImagen(fotoPerfil.Foto);
-                    fotosPerfilInfo.Add(new FotoPerfilInfo(fotoPerfil.IDFoto, image));
+                    fotosPerfilInfo.Add(new FotoPerfilResponse(fotoPerfil.IDFoto, image));
                 }
             }catch(Exception ex)
             {
