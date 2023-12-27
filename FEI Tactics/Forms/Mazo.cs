@@ -14,7 +14,6 @@ namespace FEI_Tactics
 {
     public partial class Mazo : Form
     {
-        int[] numerosMazo;
         List<Carta> cartas;
         List<PictureBox> pictureBoxesMazo = new List<PictureBox>();
         List<PictureBox> pictureBoxesDisponibles = new List<PictureBox>();
@@ -28,7 +27,7 @@ namespace FEI_Tactics
 
         private void MazoLoad(object sender, EventArgs e)
         {
-            numerosMazo = Jugador.Instancia.Mazo.Split(',').Select(s => Convert.ToInt32(s.Trim())).ToArray();
+            int[] numerosMazo = Jugador.Instancia.Mazo.Split(',').Select(s => Convert.ToInt32(s.Trim())).ToArray();
             int indiceNumerosMazo = 0;
             
             cartas = Carta.Instancia;
@@ -102,13 +101,11 @@ namespace FEI_Tactics
 
         private void activarBotones()
         {
-            btnGuardar.Visible = true;
             btnCancelar.Visible = true;
         }
 
         private void desactivarBotones()
         {
-            btnGuardar.Visible = false;
             btnCancelar.Visible = false;
         }
 
@@ -117,11 +114,6 @@ namespace FEI_Tactics
             {
                 pictureBoxesMazo[i].Visible = true;
             }
-        }
-
-        private void clicEditarMazo(object sender, EventArgs e)
-        {
-
         }
 
         private void clicCancelarCambioMazo(object sender, EventArgs e)
@@ -171,42 +163,84 @@ namespace FEI_Tactics
             activarAccionDisponibles();
         }
 
-        private void cambiarDisponible1(object sender, EventArgs e)
+        private async void cambiarDisponible1(object sender, EventArgs e)
         {
             for(int i = 0; i < pictureBoxesMazo.Count; i++)
             {
                 if (pictureBoxesMazo[i].Visible)
                 {
-                    Image imgTemp = pbCarta5.Image;
-                    pbCarta5.Image = pictureBoxesMazo[i].Image;
-                    pictureBoxesMazo[i].Image = imgTemp;
+                    int[] numerosMazo = Jugador.Instancia.Mazo.Split(',').Select(s => Convert.ToInt32(s.Trim())).ToArray();
+                    numerosMazo[i] = int.Parse(lbCarta5.Text);
+                    string mazoNuevo = string.Join(",", numerosMazo);
 
-                    string idCartaTempo = lbCarta5.Text;
-                    lbCarta5.Text = labelsCartasMazo[i].Text;
-                    labelsCartasMazo[i].Text = idCartaTempo;
+                    try
+                    {
+                        bool mazoActualizado = await JugadorService.ActualizarMazoAsync(Jugador.Instancia.Gamertag, mazoNuevo);
 
-                    mazoVisible();
-                    desactivarBotones();
+                        if (mazoActualizado)
+                        {
+                            Image imgTemp = pbCarta5.Image;
+                            pbCarta5.Image = pictureBoxesMazo[i].Image;
+                            pictureBoxesMazo[i].Image = imgTemp;
+
+                            string idCartaTempo = lbCarta5.Text;
+                            lbCarta5.Text = labelsCartasMazo[i].Text;
+                            labelsCartasMazo[i].Text = idCartaTempo;
+
+                            mazoVisible();
+                            desactivarBotones();
+                            desactivarAccionDisponibles();
+                            Jugador.ActualizarMazo(mazoNuevo);
+                            return;
+                        } else
+                        {
+                            MessageBox.Show("No se pudo actualizar el mazo. Inténtelo más tarde", "Error");
+                        }
+                    } catch(Exception ex)
+                    {
+                        Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
+                    }
                 }
             }
         }
 
-        private void cambiarDisponible2(object sender, EventArgs e)
+        private async void cambiarDisponible2(object sender, EventArgs e)
         {
             for (int i = 0; i < pictureBoxesMazo.Count; i++)
             {
                 if (pictureBoxesMazo[i].Visible)
                 {
-                    Image imgTemp = pbCarta6.Image;
-                    pbCarta6.Image = pictureBoxesMazo[i].Image;
-                    pictureBoxesMazo[i].Image = imgTemp;
+                    int[] numerosMazo = Jugador.Instancia.Mazo.Split(',').Select(s => Convert.ToInt32(s.Trim())).ToArray();
+                    numerosMazo[i] = int.Parse(lbCarta6.Text);
+                    string mazoNuevo = string.Join(",", numerosMazo);
 
-                    string idCartaTempo = lbCarta6.Text;
-                    lbCarta6.Text = labelsCartasMazo[i].Text;
-                    labelsCartasMazo[i].Text = idCartaTempo;
+                    try
+                    {
+                        bool mazoActualizado = await JugadorService.ActualizarMazoAsync(Jugador.Instancia.Gamertag, mazoNuevo);
 
-                    mazoVisible();
-                    desactivarBotones();
+                        if (mazoActualizado)
+                        {
+                            Image imgTemp = pbCarta6.Image;
+                            pbCarta6.Image = pictureBoxesMazo[i].Image;
+                            pictureBoxesMazo[i].Image = imgTemp;
+
+                            string idCartaTempo = lbCarta6.Text;
+                            lbCarta6.Text = labelsCartasMazo[i].Text;
+                            labelsCartasMazo[i].Text = idCartaTempo;
+
+                            mazoVisible();
+                            desactivarBotones();
+                            desactivarAccionDisponibles();
+                            Jugador.ActualizarMazo(mazoNuevo);
+                            return;
+                        } else
+                        {
+                            MessageBox.Show("No se pudo actualizar el mazo. Inténtelo más tarde", "Error");
+                        }
+                    } catch (Exception ex)
+                    {
+                        Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
+                    }
                 }
             }
         }

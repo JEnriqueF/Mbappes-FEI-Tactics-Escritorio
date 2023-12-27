@@ -14,10 +14,8 @@ namespace FEI_Tactics.Models
         public static List<Carta> Instancia => lazyInstancia.Value;
         private static int controladorCount = 0;
 
-        public static void Inicializar(int idCarta, int costo, int poder, string imagen, int count)
+        public static void Inicializar(int idCarta, int costo, int poder, string imagen)
         {
-            
-
             var nuevaCarta = new Carta
             {
                 IDCarta = idCarta,

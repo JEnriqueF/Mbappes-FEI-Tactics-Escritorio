@@ -43,7 +43,6 @@
             this.lbCarta5 = new System.Windows.Forms.Label();
             this.lbCarta6 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarta1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarta2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarta3)).BeginInit();
@@ -188,7 +187,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(49, 332);
+            this.btnCancelar.Location = new System.Drawing.Point(49, 309);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(89, 30);
             this.btnCancelar.TabIndex = 17;
@@ -197,23 +196,11 @@
             this.btnCancelar.Visible = false;
             this.btnCancelar.Click += new System.EventHandler(this.clicCancelarCambioMazo);
             // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Location = new System.Drawing.Point(49, 284);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(89, 30);
-            this.btnGuardar.TabIndex = 18;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Visible = false;
-            this.btnGuardar.Click += new System.EventHandler(this.clicEditarMazo);
-            // 
             // Mazo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 658);
-            this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.lbCarta6);
             this.Controls.Add(this.lbCarta5);
@@ -261,6 +248,5 @@
         private System.Windows.Forms.Label lbCarta5;
         private System.Windows.Forms.Label lbCarta6;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnGuardar;
     }
 }

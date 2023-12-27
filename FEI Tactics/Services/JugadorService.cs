@@ -119,6 +119,37 @@ namespace FEI_Tactics
             return fotosPerfil;
         }
 
+        public static async Task<bool> ActualizarMazoAsync(string gamertag, string mazoNuevo)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var requestData = new
+                    {
+                        Gamertag = gamertag,
+                        Mazo = mazoNuevo
+                    };
 
+                    string jsonData = JsonConvert.SerializeObject(requestData);
+                    StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PutAsync($"{URL_API}jugador/modificarmazo", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    } else if (response.StatusCode == HttpStatusCode.Conflict)
+                    {
+                        return false;
+                    } else
+                    {
+                        throw new HttpRequestException($"{response.StatusCode} - {response.ReasonPhrase}");
+                    }
+                }
+            } catch (HttpRequestException ex)
+            {
+                throw new Exception("Fallo en la conexión al servidor.", ex);
+            }
+        }
     }
 }

@@ -90,8 +90,7 @@ namespace FEI_Tactics
                                 ma.IDCarta,
                                 ma.Costo,
                                 ma.Poder,
-                                ma.Imagen,
-                                mazoJugador.Count
+                                ma.Imagen
                             );
                         }
                     }
