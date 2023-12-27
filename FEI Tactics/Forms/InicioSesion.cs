@@ -75,7 +75,7 @@ namespace FEI_Tactics
             try
             {
                 JugadorResponse sesionJugadorActual = await JugadorService.AutenticarInicioSesionAsync(tbGamertag.Text, tbContrasenia.Text);
-                List<CartaResponse> mazoJugador = await CartasService.RecuperarMazoAsync();
+                List<Carta> mazoJugador = await CartasService.RecuperarMazoAsync();
 
                 if (sesionJugadorActual != null)
                 {
@@ -85,12 +85,13 @@ namespace FEI_Tactics
                         return;
                     } else
                     {
-                        foreach(CartaResponse ma in mazoJugador){
+                        foreach(Carta ma in mazoJugador){
                             Carta.Inicializar(
                                 ma.IDCarta,
                                 ma.Costo,
                                 ma.Poder,
-                                ma.Imagen
+                                ma.Imagen,
+                                mazoJugador.Count
                             );
                         }
                     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +12,11 @@ namespace FEI_Tactics.Models
         private static readonly Lazy<List<Carta>> lazyInstancia = new Lazy<List<Carta>>(() => new List<Carta>(), isThreadSafe: true);
         private Carta() { }
         public static List<Carta> Instancia => lazyInstancia.Value;
+        private static int controladorCount = 0;
 
-        public static void Inicializar(int idCarta, int costo, int poder, string imagen)
+        public static void Inicializar(int idCarta, int costo, int poder, string imagen, int count)
         {
-            if (lazyInstancia.IsValueCreated)
-            {
-                return;
-            }
+            
 
             var nuevaCarta = new Carta
             {
@@ -28,11 +27,16 @@ namespace FEI_Tactics.Models
             };
 
             Instancia.Add(nuevaCarta);
+            controladorCount++;
         }
 
+        [JsonProperty("IDCarta")]
         public int IDCarta { get; set; }
+        [JsonProperty("Costo")]
         public int Costo { get; set; }
+        [JsonProperty("Poder")]
         public int Poder { get; set; }
+        [JsonProperty("Imagen")]
         public string Imagen { get; set; }
     }
 }

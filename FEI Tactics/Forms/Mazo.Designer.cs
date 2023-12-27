@@ -36,6 +36,14 @@
             this.pbCarta6 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lbCarta1 = new System.Windows.Forms.Label();
+            this.lbCarta2 = new System.Windows.Forms.Label();
+            this.lbCarta3 = new System.Windows.Forms.Label();
+            this.lbCarta4 = new System.Windows.Forms.Label();
+            this.lbCarta5 = new System.Windows.Forms.Label();
+            this.lbCarta6 = new System.Windows.Forms.Label();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarta1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarta2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarta3)).BeginInit();
@@ -49,48 +57,60 @@
             this.pbCarta1.Location = new System.Drawing.Point(49, 54);
             this.pbCarta1.Name = "pbCarta1";
             this.pbCarta1.Size = new System.Drawing.Size(100, 130);
+            this.pbCarta1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCarta1.TabIndex = 0;
             this.pbCarta1.TabStop = false;
+            this.pbCarta1.Click += new System.EventHandler(this.seleccionarCarta1);
             // 
             // pbCarta2
             // 
             this.pbCarta2.Location = new System.Drawing.Point(250, 54);
             this.pbCarta2.Name = "pbCarta2";
             this.pbCarta2.Size = new System.Drawing.Size(100, 130);
+            this.pbCarta2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCarta2.TabIndex = 1;
             this.pbCarta2.TabStop = false;
+            this.pbCarta2.Click += new System.EventHandler(this.seleccionarCarta2);
             // 
             // pbCarta3
             // 
             this.pbCarta3.Location = new System.Drawing.Point(439, 54);
             this.pbCarta3.Name = "pbCarta3";
             this.pbCarta3.Size = new System.Drawing.Size(100, 130);
+            this.pbCarta3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCarta3.TabIndex = 2;
             this.pbCarta3.TabStop = false;
+            this.pbCarta3.Click += new System.EventHandler(this.seleccionarCarta3);
             // 
             // pbCarta4
             // 
             this.pbCarta4.Location = new System.Drawing.Point(250, 242);
             this.pbCarta4.Name = "pbCarta4";
             this.pbCarta4.Size = new System.Drawing.Size(100, 130);
+            this.pbCarta4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCarta4.TabIndex = 4;
             this.pbCarta4.TabStop = false;
+            this.pbCarta4.Click += new System.EventHandler(this.seleccionarCarta4);
             // 
             // pbCarta5
             // 
             this.pbCarta5.Location = new System.Drawing.Point(150, 466);
             this.pbCarta5.Name = "pbCarta5";
             this.pbCarta5.Size = new System.Drawing.Size(100, 130);
+            this.pbCarta5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCarta5.TabIndex = 6;
             this.pbCarta5.TabStop = false;
+            this.pbCarta5.Click += new System.EventHandler(this.cambiarDisponible1);
             // 
             // pbCarta6
             // 
             this.pbCarta6.Location = new System.Drawing.Point(363, 466);
             this.pbCarta6.Name = "pbCarta6";
             this.pbCarta6.Size = new System.Drawing.Size(100, 130);
+            this.pbCarta6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCarta6.TabIndex = 7;
             this.pbCarta6.TabStop = false;
+            this.pbCarta6.Click += new System.EventHandler(this.cambiarDisponible2);
             // 
             // label1
             // 
@@ -112,11 +132,95 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Cartas";
             // 
+            // lbCarta1
+            // 
+            this.lbCarta1.AutoSize = true;
+            this.lbCarta1.Location = new System.Drawing.Point(76, 187);
+            this.lbCarta1.Name = "lbCarta1";
+            this.lbCarta1.Size = new System.Drawing.Size(44, 16);
+            this.lbCarta1.TabIndex = 11;
+            this.lbCarta1.Text = "label3";
+            // 
+            // lbCarta2
+            // 
+            this.lbCarta2.AutoSize = true;
+            this.lbCarta2.Location = new System.Drawing.Point(278, 187);
+            this.lbCarta2.Name = "lbCarta2";
+            this.lbCarta2.Size = new System.Drawing.Size(44, 16);
+            this.lbCarta2.TabIndex = 12;
+            this.lbCarta2.Text = "label4";
+            // 
+            // lbCarta3
+            // 
+            this.lbCarta3.AutoSize = true;
+            this.lbCarta3.Location = new System.Drawing.Point(471, 187);
+            this.lbCarta3.Name = "lbCarta3";
+            this.lbCarta3.Size = new System.Drawing.Size(44, 16);
+            this.lbCarta3.TabIndex = 13;
+            this.lbCarta3.Text = "label5";
+            // 
+            // lbCarta4
+            // 
+            this.lbCarta4.AutoSize = true;
+            this.lbCarta4.Location = new System.Drawing.Point(278, 375);
+            this.lbCarta4.Name = "lbCarta4";
+            this.lbCarta4.Size = new System.Drawing.Size(44, 16);
+            this.lbCarta4.TabIndex = 14;
+            this.lbCarta4.Text = "label6";
+            // 
+            // lbCarta5
+            // 
+            this.lbCarta5.AutoSize = true;
+            this.lbCarta5.Location = new System.Drawing.Point(179, 599);
+            this.lbCarta5.Name = "lbCarta5";
+            this.lbCarta5.Size = new System.Drawing.Size(44, 16);
+            this.lbCarta5.TabIndex = 15;
+            this.lbCarta5.Text = "label7";
+            // 
+            // lbCarta6
+            // 
+            this.lbCarta6.AutoSize = true;
+            this.lbCarta6.Location = new System.Drawing.Point(394, 599);
+            this.lbCarta6.Name = "lbCarta6";
+            this.lbCarta6.Size = new System.Drawing.Size(44, 16);
+            this.lbCarta6.TabIndex = 16;
+            this.lbCarta6.Text = "label8";
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(49, 332);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(89, 30);
+            this.btnCancelar.TabIndex = 17;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Visible = false;
+            this.btnCancelar.Click += new System.EventHandler(this.clicCancelarCambioMazo);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Location = new System.Drawing.Point(49, 284);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(89, 30);
+            this.btnGuardar.TabIndex = 18;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Visible = false;
+            this.btnGuardar.Click += new System.EventHandler(this.clicEditarMazo);
+            // 
             // Mazo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 658);
+            this.Controls.Add(this.btnGuardar);
+            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.lbCarta6);
+            this.Controls.Add(this.lbCarta5);
+            this.Controls.Add(this.lbCarta4);
+            this.Controls.Add(this.lbCarta3);
+            this.Controls.Add(this.lbCarta2);
+            this.Controls.Add(this.lbCarta1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pbCarta6);
@@ -150,5 +254,13 @@
         private System.Windows.Forms.PictureBox pbCarta6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbCarta1;
+        private System.Windows.Forms.Label lbCarta2;
+        private System.Windows.Forms.Label lbCarta3;
+        private System.Windows.Forms.Label lbCarta4;
+        private System.Windows.Forms.Label lbCarta5;
+        private System.Windows.Forms.Label lbCarta6;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnGuardar;
     }
 }

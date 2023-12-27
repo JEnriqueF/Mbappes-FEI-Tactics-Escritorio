@@ -13,9 +13,9 @@ namespace FEI_Tactics.Services
     {
         private const string URL_API = "https://mk2m8b3x-3000.usw3.devtunnels.ms/";
 
-        public static async Task<List<CartaResponse>> RecuperarMazoAsync()
+        public static async Task<List<Carta>> RecuperarMazoAsync()
         {
-            List<CartaResponse> mazo = new List<CartaResponse>();
+            List<Carta> cartas = new List<Carta>();
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -25,11 +25,11 @@ namespace FEI_Tactics.Services
                     if (response.IsSuccessStatusCode)
                     {
                         /*string responseJson = await response.Content.ReadAsStringAsync();
-                        mazo = JsonConvert.DeserializeObject<List<MazoResponse>>(responseJson);*/
+                        mazo = JsonConvert.DeserializeObject<List<CartaResponse>>(responseJson);*/
 
                         string responseJson = await response.Content.ReadAsStringAsync();
-                        var responseObj = JsonConvert.DeserializeAnonymousType(responseJson, new { imagenesMazo = new List<CartaResponse>() });
-                        mazo = responseObj.imagenesMazo;
+                        var responseObj = JsonConvert.DeserializeAnonymousType(responseJson, new { cartas = new List<Carta>() });
+                        cartas = responseObj.cartas;
                     } else
                     {
                         throw new HttpRequestException($"{response.StatusCode} - {response.ReasonPhrase}");
@@ -39,7 +39,7 @@ namespace FEI_Tactics.Services
             {
                 throw new Exception("Fallo en la conexión al servidor.", ex);
             }
-            return mazo;
+            return cartas;
         }
     }
 }
