@@ -139,6 +139,7 @@
             this.lbCarta1.Size = new System.Drawing.Size(44, 16);
             this.lbCarta1.TabIndex = 11;
             this.lbCarta1.Text = "label3";
+            this.lbCarta1.Visible = false;
             // 
             // lbCarta2
             // 
@@ -148,6 +149,7 @@
             this.lbCarta2.Size = new System.Drawing.Size(44, 16);
             this.lbCarta2.TabIndex = 12;
             this.lbCarta2.Text = "label4";
+            this.lbCarta2.Visible = false;
             // 
             // lbCarta3
             // 
@@ -157,6 +159,7 @@
             this.lbCarta3.Size = new System.Drawing.Size(44, 16);
             this.lbCarta3.TabIndex = 13;
             this.lbCarta3.Text = "label5";
+            this.lbCarta3.Visible = false;
             // 
             // lbCarta4
             // 
@@ -166,6 +169,7 @@
             this.lbCarta4.Size = new System.Drawing.Size(44, 16);
             this.lbCarta4.TabIndex = 14;
             this.lbCarta4.Text = "label6";
+            this.lbCarta4.Visible = false;
             // 
             // lbCarta5
             // 
@@ -175,6 +179,7 @@
             this.lbCarta5.Size = new System.Drawing.Size(44, 16);
             this.lbCarta5.TabIndex = 15;
             this.lbCarta5.Text = "label7";
+            this.lbCarta5.Visible = false;
             // 
             // lbCarta6
             // 
@@ -184,6 +189,7 @@
             this.lbCarta6.Size = new System.Drawing.Size(44, 16);
             this.lbCarta6.TabIndex = 16;
             this.lbCarta6.Text = "label8";
+            this.lbCarta6.Visible = false;
             // 
             // btnCancelar
             // 
