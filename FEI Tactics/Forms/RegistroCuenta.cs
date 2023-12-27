@@ -27,6 +27,7 @@ namespace FEI_Tactics.Forms
                 CargarImagenes();
                 buttonCambiarFoto.Enabled = true;
                 buttonRegistrar.Enabled = true;
+                VerificarFotosObtenidas();
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
@@ -70,6 +71,15 @@ namespace FEI_Tactics.Forms
             pbFotoPerfil.BackColor = Color.Transparent;
         }
 
+        private void VerificarFotosObtenidas()
+        {
+            if (fotosPerfilInfo == null)
+            {
+                buttonRegistrar.Enabled = false;
+                buttonCambiarFoto.Enabled = false;
+            }
+        }
+
         private void buttonRegresar_Click(object sender, EventArgs e)
         {
             if (!tbGamertag.Text.Trim().Equals("") || !tbPassword.Text.Trim().Equals(""))
@@ -103,6 +113,8 @@ namespace FEI_Tactics.Forms
                 }
             }catch(Exception ex)
             {
+                buttonCambiarFoto.Enabled = false;
+                buttonRegistrar.Enabled = false;
                 Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
             }
         }

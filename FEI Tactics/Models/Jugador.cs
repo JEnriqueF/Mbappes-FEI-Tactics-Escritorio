@@ -32,6 +32,11 @@ namespace FEI_Tactics
             Instancia.Mazo = mazoActualizado;
         }
 
+        public static void ActualizarFotoPerfil(int nuevaFotoPerfil)
+        {
+            Instancia.IdFoto = nuevaFotoPerfil;
+        }
+
         public string Gamertag { get; set; }
         public string Contrasenia { get; set; }
         public int PartidasGanadas { get; set; }

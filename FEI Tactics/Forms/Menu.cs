@@ -22,8 +22,8 @@ namespace FEI_Tactics
         public Menu()
         {
             //C:\\Users\\LENOVO\\Documents\\Desarrollo de sistemas en red\\FEI Tactics Escritorio\\FEI Tactics\\Mbappes-FEI-Tactics-Escritorio\\FEI Tactics\\Forms\\musica_fei_tactics.wav
-            //D:\\Periodo_7\\my_apps\\FEITacticsEscritorio\\Mbappes-FEI-Tactics-Escritorio\\FEI Tactics\\Forms\\musica_fei_tactics.wav
-            player = new SoundPlayer("C:\\Users\\LENOVO\\Documents\\Desarrollo de sistemas en red\\FEI Tactics Escritorio\\FEI Tactics\\Mbappes-FEI-Tactics-Escritorio\\FEI Tactics\\Forms\\musica_fei_tactics.wav");
+            //D:\Periodo_7\my_apps\FEITACTICSDESKTOP\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\Forms\musica_fei_tactics.wav
+            player = new SoundPlayer("D:\\Periodo_7\\my_apps\\FEITACTICSDESKTOP\\Mbappes-FEI-Tactics-Escritorio\\FEI Tactics\\Forms\\musica_fei_tactics.wav");
             player.PlayLooping();
             InitializeComponent();
         }

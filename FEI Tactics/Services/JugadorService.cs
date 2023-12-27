@@ -3,6 +3,7 @@ using FEI_Tactics.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -151,5 +152,78 @@ namespace FEI_Tactics
                 throw new Exception("Fallo en la conexión al servidor.", ex);
             }
         }
+
+        public static async Task<FotoPerfil> RecuperarFotoPerfilAsync(int idFotoPerfil)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var requestData = new { idFoto = idFotoPerfil };
+                    string jsonData = JsonConvert.SerializeObject(requestData);
+                    StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PostAsync($"{URL_API}jugador/imagenperfilesion", content);
+
+                    Debug.WriteLine($"HTTP Status Code: {response.StatusCode}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseJson = await response.Content.ReadAsStringAsync();
+                        var responseObj = JsonConvert.DeserializeAnonymousType(responseJson, new { imagenEncontrada = new FotoPerfil() });
+                        return responseObj.imagenEncontrada;
+
+                    }
+                    else if (response.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        throw new HttpRequestException($"{response.StatusCode} - {response.ReasonPhrase}");
+                    }
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception("Fallo en la conexión al servidor.", ex);
+            }
+        }
+
+        public static async Task<Boolean> ModificarImagenPerfilAsync(string gamerTag, int idFotoPerfil)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var requestData = new
+                    {
+                        Gamertag = gamerTag,
+                        idFoto = idFotoPerfil
+                    };
+                    string jsonData = JsonConvert.SerializeObject(requestData);
+                    StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PutAsync($"{URL_API}jugador/modificarimagenperfil", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    else if (response.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        throw new HttpRequestException($"{response.StatusCode} - {response.ReasonPhrase}");
+                    }
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception("Fallo en la conexión al servidor.", ex);
+            }
+        }
+
     }
 }

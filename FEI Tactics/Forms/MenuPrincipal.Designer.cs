@@ -30,31 +30,32 @@ namespace FEI_Tactics
         /// </summary>
         private void InitializeComponent()
         {
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.buttonBuscarPartida = new FontAwesome.Sharp.IconButton();
             this.label1 = new System.Windows.Forms.Label();
             this.lbGamertag = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pbFotoPerfil = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFotoPerfil)).BeginInit();
             this.SuspendLayout();
             // 
-            // iconButton1
+            // buttonBuscarPartida
             // 
-            this.iconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.Location = new System.Drawing.Point(227, 378);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(145, 51);
-            this.iconButton1.TabIndex = 0;
-            this.iconButton1.Text = "Buscar partida";
-            this.iconButton1.UseVisualStyleBackColor = true;
+            this.buttonBuscarPartida.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonBuscarPartida.Enabled = false;
+            this.buttonBuscarPartida.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.buttonBuscarPartida.IconColor = System.Drawing.Color.Black;
+            this.buttonBuscarPartida.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.buttonBuscarPartida.Location = new System.Drawing.Point(219, 378);
+            this.buttonBuscarPartida.Name = "buttonBuscarPartida";
+            this.buttonBuscarPartida.Size = new System.Drawing.Size(145, 51);
+            this.buttonBuscarPartida.TabIndex = 0;
+            this.buttonBuscarPartida.Text = "Buscar partida";
+            this.buttonBuscarPartida.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(188, 237);
+            this.label1.Location = new System.Drawing.Point(180, 237);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(175, 69);
             this.label1.TabIndex = 1;
@@ -66,31 +67,32 @@ namespace FEI_Tactics
             this.lbGamertag.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbGamertag.Location = new System.Drawing.Point(80, 29);
             this.lbGamertag.Name = "lbGamertag";
-            this.lbGamertag.Size = new System.Drawing.Size(157, 29);
+            this.lbGamertag.Size = new System.Drawing.Size(119, 29);
             this.lbGamertag.TabIndex = 2;
-            this.lbGamertag.Text = "------------------";
+            this.lbGamertag.Text = "Gamertag";
             // 
-            // pictureBox1
+            // pbFotoPerfil
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(62, 62);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
+            this.pbFotoPerfil.Location = new System.Drawing.Point(12, 12);
+            this.pbFotoPerfil.Name = "pbFotoPerfil";
+            this.pbFotoPerfil.Size = new System.Drawing.Size(62, 62);
+            this.pbFotoPerfil.TabIndex = 3;
+            this.pbFotoPerfil.TabStop = false;
+            this.pbFotoPerfil.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 658);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbFotoPerfil);
             this.Controls.Add(this.lbGamertag);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.iconButton1);
+            this.Controls.Add(this.buttonBuscarPartida);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MenuPrincipal";
             this.Text = "MenuPrincipal";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbFotoPerfil)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,9 +100,9 @@ namespace FEI_Tactics
 
         #endregion
 
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton buttonBuscarPartida;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbGamertag;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbFotoPerfil;
     }
 }
