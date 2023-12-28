@@ -34,6 +34,7 @@ namespace FEI_Tactics
             this.label1 = new System.Windows.Forms.Label();
             this.lbGamertag = new System.Windows.Forms.Label();
             this.pbFotoPerfil = new System.Windows.Forms.PictureBox();
+            this.buttonCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbFotoPerfil)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@ namespace FEI_Tactics
             this.buttonBuscarPartida.TabIndex = 0;
             this.buttonBuscarPartida.Text = "Buscar partida";
             this.buttonBuscarPartida.UseVisualStyleBackColor = true;
+            this.buttonBuscarPartida.Click += new System.EventHandler(this.buttonBuscarPartida_Click);
             // 
             // label1
             // 
@@ -76,15 +78,29 @@ namespace FEI_Tactics
             this.pbFotoPerfil.Location = new System.Drawing.Point(12, 12);
             this.pbFotoPerfil.Name = "pbFotoPerfil";
             this.pbFotoPerfil.Size = new System.Drawing.Size(62, 62);
+            this.pbFotoPerfil.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbFotoPerfil.TabIndex = 3;
             this.pbFotoPerfil.TabStop = false;
-            this.pbFotoPerfil.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            // 
+            // buttonCancelar
+            // 
+            this.buttonCancelar.BackColor = System.Drawing.Color.Red;
+            this.buttonCancelar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonCancelar.Location = new System.Drawing.Point(219, 378);
+            this.buttonCancelar.Name = "buttonCancelar";
+            this.buttonCancelar.Size = new System.Drawing.Size(145, 51);
+            this.buttonCancelar.TabIndex = 4;
+            this.buttonCancelar.Text = "Cancelar";
+            this.buttonCancelar.UseVisualStyleBackColor = false;
+            this.buttonCancelar.Visible = false;
+            this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
             // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 658);
+            this.Controls.Add(this.buttonCancelar);
             this.Controls.Add(this.pbFotoPerfil);
             this.Controls.Add(this.lbGamertag);
             this.Controls.Add(this.label1);
@@ -104,5 +120,6 @@ namespace FEI_Tactics
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbGamertag;
         private System.Windows.Forms.PictureBox pbFotoPerfil;
+        private System.Windows.Forms.Button buttonCancelar;
     }
 }
