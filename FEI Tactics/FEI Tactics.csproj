@@ -56,6 +56,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Partida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Partida.Designer.cs">
+      <DependentUpon>Partida.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RegistroCuenta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Partida.resx">
+      <DependentUpon>Partida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Perfil.resx">
       <DependentUpon>Perfil.cs</DependentUpon>

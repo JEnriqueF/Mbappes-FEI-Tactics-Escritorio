@@ -32,16 +32,24 @@ namespace FEI_Tactics.Services
                                         
                     if (response.IsSuccessStatusCode)
                     {
+                        /*string responseJson = await response.Content.ReadAsStringAsync();
+                        return responseJson;*/
                         string responseJson = await response.Content.ReadAsStringAsync();
                         JObject jsonResponse = JObject.Parse(responseJson);
+
+                        // Extraer el valor de la propiedad "Respuesta"
                         string respuesta = jsonResponse["Respuesta"].ToString();
 
                         return respuesta;
                     }
                     else if (response.StatusCode == HttpStatusCode.BadRequest)
                     {
+                        /*string responseJson = await response.Content.ReadAsStringAsync();
+                        return responseJson;*/
                         string responseJson = await response.Content.ReadAsStringAsync();
                         JObject jsonResponse = JObject.Parse(responseJson);
+
+                        // Extraer el valor de la propiedad "Respuesta"
                         string respuesta = jsonResponse["Respuesta"].ToString();
 
                         return respuesta;

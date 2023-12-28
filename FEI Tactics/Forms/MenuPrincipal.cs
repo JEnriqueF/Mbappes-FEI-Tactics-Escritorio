@@ -1,4 +1,5 @@
-﻿using FEI_Tactics.Models;
+﻿using FEI_Tactics.Forms;
+using FEI_Tactics.Models;
 using FEI_Tactics.Services;
 using FEI_Tactics.Utilities;
 using System;
@@ -68,6 +69,12 @@ namespace FEI_Tactics
                     respuestaSolicitudPartida = await MatchMakingService.SolicitarPartidaAsync(Jugador.Instancia.Gamertag);
                     Mensaje.MostrarMensaje(respuestaSolicitudPartida, "Partida creada", MessageBoxIcon.Information);
                 } while (respuestaSolicitudPartida.Equals("Ya se solicitó la partida") || respuestaSolicitudPartida.Equals("Solicitud Guardada"));
+
+                if (respuestaSolicitudPartida.Equals("Partida Creada"))
+                {
+                    Partida partida = new Partida();
+                    partida.Show();
+                }
             }
             catch (Exception ex)
             {

@@ -81,3 +81,4 @@ D:\Periodo_7\my_apps\FEITACTICSDESKTOP\Mbappes-FEI-Tactics-Escritorio\FEI Tactic
 D:\Periodo_7\my_apps\FEITACTICSDESKTOP\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.csproj.CopyComplete
 D:\Periodo_7\my_apps\FEITACTICSDESKTOP\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.exe
 D:\Periodo_7\my_apps\FEITACTICSDESKTOP\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.pdb
+D:\Periodo_7\my_apps\FEITACTICSDESKTOP\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI_Tactics.Forms.Partida.resources
