@@ -70,7 +70,7 @@ namespace FEI_Tactics
                     Mensaje.MostrarMensaje(respuestaSolicitudPartida, "Partida creada", MessageBoxIcon.Information);
                 } while (respuestaSolicitudPartida.Equals("Ya se solicitó la partida") || respuestaSolicitudPartida.Equals("Solicitud Guardada"));
 
-                if (respuestaSolicitudPartida.Equals("Partida Creada"))
+                if (respuestaSolicitudPartida.Equals("Partida Creada") || !respuestaSolicitudPartida.Equals(Jugador.Instancia.Gamertag))
                 {
                     Partida partida = new Partida();
                     partida.Show();
