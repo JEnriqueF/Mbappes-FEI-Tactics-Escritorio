@@ -36,15 +36,12 @@ namespace FEI_Tactics.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string responseJson = await response.Content.ReadAsStringAsync();
-
-                        // Intentar deserializar como MatchMakingResponse
                         try
                         {
                             var responseObj = JsonConvert.DeserializeObject<MatchMakingResponse>(responseJson);
                             return responseObj;
                         } catch (JsonSerializationException)
                         {
-                            // Si la deserialización como MatchMakingResponse falla, intentar como un objeto anónimo
                             var responseObj = JsonConvert.DeserializeAnonymousType(responseJson, new { Respuesta = "", Gamertag = "" });
                             return new MatchMakingResponse(responseObj.Respuesta, responseObj.Gamertag);
                         }
@@ -93,6 +90,42 @@ namespace FEI_Tactics.Services
                     return responseObject.Respuesta;
                 }
             } catch (Exception ex)
+            {
+                throw new Exception("Fallo en la conexión al servidor.", ex);
+            }
+        }
+
+        //TEST
+        public static async Task<string> CancelarPartidaAsync(string gamerTag)
+        {
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create($"{URL_API}matchmaking/cancelarpartida");
+                request.Method = "PATCH";
+                request.ContentType = "application/json";
+
+                var requestData = new
+                {
+                    Gamertag = gamerTag
+                };
+
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    string jsonData = JsonConvert.SerializeObject(requestData);
+                    streamWriter.Write(jsonData);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                using (var response = await request.GetResponseAsync())
+                using (var streamReader = new StreamReader(response.GetResponseStream()))
+                {
+                    string responseJson = await streamReader.ReadToEndAsync();
+                    var responseObject = JsonConvert.DeserializeAnonymousType(responseJson, new { Respuesta = "" });
+                    return responseObject.Respuesta;
+                }
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Fallo en la conexión al servidor.", ex);
             }

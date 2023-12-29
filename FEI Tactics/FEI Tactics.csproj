@@ -68,12 +68,15 @@
     <Compile Include="Forms\RegistroCuenta.Designer.cs">
       <DependentUpon>RegistroCuenta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Escenario.cs" />
+    <Compile Include="Models\EscenarioResponse.cs" />
     <Compile Include="Models\FotoPerfil.cs" />
     <Compile Include="Models\FotoPerfilResponse.cs" />
     <Compile Include="Models\JugadorResponse.cs" />
     <Compile Include="Models\Carta.cs" />
     <Compile Include="Models\CartaResponse.cs" />
     <Compile Include="Models\MatchMakingResponse.cs" />
+    <Compile Include="Services\EscenarioService.cs" />
     <Compile Include="Services\JugadorService.cs" />
     <Compile Include="Forms\Configuración.cs">
       <SubType>Form</SubType>

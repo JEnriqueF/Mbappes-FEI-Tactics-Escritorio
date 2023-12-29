@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbEnemigo = new System.Windows.Forms.Label();
+            this.lbOponente = new System.Windows.Forms.Label();
             this.pbFotoPerfilEnemigo = new System.Windows.Forms.PictureBox();
             this.pbMiCarta4 = new System.Windows.Forms.PictureBox();
             this.pbMiCarta2 = new System.Windows.Forms.PictureBox();
@@ -63,14 +63,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbEscenario1)).BeginInit();
             this.SuspendLayout();
             // 
-            // lbEnemigo
+            // lbOponente
             // 
-            this.lbEnemigo.AutoSize = true;
-            this.lbEnemigo.Location = new System.Drawing.Point(102, 48);
-            this.lbEnemigo.Name = "lbEnemigo";
-            this.lbEnemigo.Size = new System.Drawing.Size(61, 16);
-            this.lbEnemigo.TabIndex = 0;
-            this.lbEnemigo.Text = "Enemigo";
+            this.lbOponente.AutoSize = true;
+            this.lbOponente.Location = new System.Drawing.Point(102, 48);
+            this.lbOponente.Name = "lbOponente";
+            this.lbOponente.Size = new System.Drawing.Size(66, 16);
+            this.lbOponente.TabIndex = 0;
+            this.lbOponente.Text = "Oponente";
             // 
             // pbFotoPerfilEnemigo
             // 
@@ -204,21 +204,27 @@
             // 
             // buttonAbandonarPartida
             // 
+            this.buttonAbandonarPartida.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonAbandonarPartida.Enabled = false;
             this.buttonAbandonarPartida.Location = new System.Drawing.Point(440, 44);
             this.buttonAbandonarPartida.Name = "buttonAbandonarPartida";
             this.buttonAbandonarPartida.Size = new System.Drawing.Size(128, 26);
             this.buttonAbandonarPartida.TabIndex = 17;
             this.buttonAbandonarPartida.Text = "Abandonar partida";
             this.buttonAbandonarPartida.UseVisualStyleBackColor = true;
+            this.buttonAbandonarPartida.Click += new System.EventHandler(this.buttonAbandonarPartida_Click);
             // 
             // buttonTerminarTurno
             // 
-            this.buttonTerminarTurno.Location = new System.Drawing.Point(228, 675);
+            this.buttonTerminarTurno.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonTerminarTurno.Enabled = false;
+            this.buttonTerminarTurno.Location = new System.Drawing.Point(224, 675);
             this.buttonTerminarTurno.Name = "buttonTerminarTurno";
             this.buttonTerminarTurno.Size = new System.Drawing.Size(128, 26);
             this.buttonTerminarTurno.TabIndex = 18;
             this.buttonTerminarTurno.Text = "Terminar turno";
             this.buttonTerminarTurno.UseVisualStyleBackColor = true;
+            this.buttonTerminarTurno.Click += new System.EventHandler(this.buttonTerminarTurno_Click);
             // 
             // Partida
             // 
@@ -243,7 +249,7 @@
             this.Controls.Add(this.pbMiCarta2);
             this.Controls.Add(this.pbMiCarta4);
             this.Controls.Add(this.pbFotoPerfilEnemigo);
-            this.Controls.Add(this.lbEnemigo);
+            this.Controls.Add(this.lbOponente);
             this.Name = "Partida";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Partida";
@@ -268,7 +274,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lbEnemigo;
+        private System.Windows.Forms.Label lbOponente;
         private System.Windows.Forms.PictureBox pbFotoPerfilEnemigo;
         private System.Windows.Forms.PictureBox pbMiCarta4;
         private System.Windows.Forms.PictureBox pbMiCarta2;

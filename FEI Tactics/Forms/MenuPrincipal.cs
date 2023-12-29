@@ -91,6 +91,8 @@ namespace FEI_Tactics
                     buttonCancelar.Visible = false;
                     buttonBuscarPartida.Visible = true;
                     Partida partida = new Partida();
+                    //TEST
+                    await partida.ObtenerDatosOponente(respuestaSolicitudPartida.Gamertag);
                     partida.Show();
                 }
             }
@@ -102,12 +104,18 @@ namespace FEI_Tactics
 
         private async void metodoCancelarBusqueda()
         {
-            string respuestaCancelarBusqueda = await MatchMakingService.CancelarBusquedaAsync(Jugador.Instancia.Gamertag);
-
-            if (respuestaCancelarBusqueda.Equals("Jugador eliminado correctamente"))
+            try
             {
-                cancelarBusqueda = true;
-                buttonCancelar.Visible = false;
+                string respuestaCancelarBusqueda = await MatchMakingService.CancelarBusquedaAsync(Jugador.Instancia.Gamertag);
+
+                if (respuestaCancelarBusqueda.Equals("Jugador eliminado correctamente"))
+                {
+                    cancelarBusqueda = true;
+                    buttonCancelar.Visible = false;
+                }
+            } catch(Exception ex)
+            {
+                Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
             }
         }
     }
