@@ -9,5 +9,12 @@ namespace FEI_Tactics.Models
     public class MatchMakingResponse
     {
         public string Respuesta { get; set; }
+        public string Gamertag { get; set; }
+
+        public MatchMakingResponse(string respuesta, string gamertag)
+        {
+            Respuesta = respuesta;
+            Gamertag = gamertag;
+        }
     }
 }

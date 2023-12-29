@@ -17,6 +17,8 @@ namespace FEI_Tactics
 {
     public partial class MenuPrincipal : Form
     {
+        private bool cancelarBusqueda = false;
+
         FotoPerfilResponse fotoActual;
         public MenuPrincipal()
         {
@@ -54,23 +56,37 @@ namespace FEI_Tactics
             }
         }
 
-        private void buttonCancelar_Click(object sender, EventArgs e)
+        private async void buttonCancelar_Click(object sender, EventArgs e)
         {
+            string respuestaCancelarBusqueda = await MatchMakingService.CancelarBusquedaAsync(Jugador.Instancia.Gamertag);
 
+            if(respuestaCancelarBusqueda.Equals("Jugador eliminado correctamente"))
+            {
+                cancelarBusqueda = true;
+                buttonCancelar.Visible = false;
+            }
         }
 
         private async void buttonBuscarPartida_Click(object sender, EventArgs e)
         {
             try
             {
-                string respuestaSolicitudPartida;
+                MatchMakingResponse respuestaSolicitudPartida;
+                buttonBuscarPartida.Visible = false;
+                buttonCancelar.Visible = true;
+
                 do
                 {
+                    if (cancelarBusqueda)
+                    {
+                        buttonBuscarPartida.Visible = true;
+                        cancelarBusqueda = false;
+                        return;
+                    }
                     respuestaSolicitudPartida = await MatchMakingService.SolicitarPartidaAsync(Jugador.Instancia.Gamertag);
-                    Mensaje.MostrarMensaje(respuestaSolicitudPartida, "Partida creada", MessageBoxIcon.Information);
-                } while (respuestaSolicitudPartida.Equals("Ya se solicitó la partida") || respuestaSolicitudPartida.Equals("Solicitud Guardada"));
+                } while (respuestaSolicitudPartida.Respuesta != null && (respuestaSolicitudPartida.Respuesta.Equals("Ya se solicitó la partida") || respuestaSolicitudPartida.Respuesta.Equals("Solicitud Guardada") || respuestaSolicitudPartida.Respuesta.Equals("Partida Creada")));
 
-                if (respuestaSolicitudPartida.Equals("Partida Creada") || !respuestaSolicitudPartida.Equals(Jugador.Instancia.Gamertag))
+                if (!respuestaSolicitudPartida.Gamertag.Equals(Jugador.Instancia.Gamertag))
                 {
                     Partida partida = new Partida();
                     partida.Show();
