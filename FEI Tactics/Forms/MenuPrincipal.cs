@@ -56,15 +56,9 @@ namespace FEI_Tactics
             }
         }
 
-        private async void buttonCancelar_Click(object sender, EventArgs e)
+        private void buttonCancelar_Click(object sender, EventArgs e)
         {
-            string respuestaCancelarBusqueda = await MatchMakingService.CancelarBusquedaAsync(Jugador.Instancia.Gamertag);
-
-            if(respuestaCancelarBusqueda.Equals("Jugador eliminado correctamente"))
-            {
-                cancelarBusqueda = true;
-                buttonCancelar.Visible = false;
-            }
+            metodoCancelarBusqueda();
         }
 
         private async void buttonBuscarPartida_Click(object sender, EventArgs e)
@@ -74,9 +68,14 @@ namespace FEI_Tactics
                 MatchMakingResponse respuestaSolicitudPartida;
                 buttonBuscarPartida.Visible = false;
                 buttonCancelar.Visible = true;
+                int cicloBusqueda = 0;
 
                 do
                 {
+                    if (cicloBusqueda == 5)
+                    {
+                        metodoCancelarBusqueda();
+                    }
                     if (cancelarBusqueda)
                     {
                         buttonBuscarPartida.Visible = true;
@@ -84,10 +83,13 @@ namespace FEI_Tactics
                         return;
                     }
                     respuestaSolicitudPartida = await MatchMakingService.SolicitarPartidaAsync(Jugador.Instancia.Gamertag);
+                    cicloBusqueda++;
                 } while (respuestaSolicitudPartida.Respuesta != null && (respuestaSolicitudPartida.Respuesta.Equals("Ya se solicitó la partida") || respuestaSolicitudPartida.Respuesta.Equals("Solicitud Guardada") || respuestaSolicitudPartida.Respuesta.Equals("Partida Creada")));
 
                 if (!respuestaSolicitudPartida.Gamertag.Equals(Jugador.Instancia.Gamertag))
                 {
+                    buttonCancelar.Visible = false;
+                    buttonBuscarPartida.Visible = true;
                     Partida partida = new Partida();
                     partida.Show();
                 }
@@ -95,6 +97,17 @@ namespace FEI_Tactics
             catch (Exception ex)
             {
                 Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
+            }
+        }
+
+        private async void metodoCancelarBusqueda()
+        {
+            string respuestaCancelarBusqueda = await MatchMakingService.CancelarBusquedaAsync(Jugador.Instancia.Gamertag);
+
+            if (respuestaCancelarBusqueda.Equals("Jugador eliminado correctamente"))
+            {
+                cancelarBusqueda = true;
+                buttonCancelar.Visible = false;
             }
         }
     }

@@ -85,6 +85,7 @@ namespace FEI_Tactics
             // buttonCancelar
             // 
             this.buttonCancelar.BackColor = System.Drawing.Color.Red;
+            this.buttonCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonCancelar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.buttonCancelar.Location = new System.Drawing.Point(219, 378);
             this.buttonCancelar.Name = "buttonCancelar";
