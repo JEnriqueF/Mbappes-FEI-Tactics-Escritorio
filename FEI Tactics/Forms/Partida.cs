@@ -218,21 +218,42 @@ namespace FEI_Tactics.Forms
                 if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
                 {
                     pbMiCartaTiro1.Image = pictureBoxesMazo[i].Image;
-                    lbMiCarta1.Text = lbCartaMazo1.Text;
+                    lbMiCarta1.Text = labelsCartasMazo[i].Text;
                     pictureBoxesMazo[i].Image = null;
                     pbMiCartaTiro1.Enabled = false;
+                    pbMiCartaTiro1.BorderStyle = BorderStyle.None;
                 }
             }
         }
 
         private void insertarCarta2(object sender, EventArgs e)
         {
-
+            for (int i = 0; i < pictureBoxesMazo.Count; i++)
+            {
+                if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
+                {
+                    pbMiCartaTiro2.Image = pictureBoxesMazo[i].Image;
+                    lbMiCarta2.Text = labelsCartasMazo[i].Text;
+                    pictureBoxesMazo[i].Image = null;
+                    pbMiCartaTiro2.Enabled = false;
+                    pbMiCartaTiro2.BorderStyle = BorderStyle.None;
+                }
+            }
         }
 
         private void insertarCarta3(object sender, EventArgs e)
         {
-
+            for (int i = 0; i < pictureBoxesMazo.Count; i++)
+            {
+                if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
+                {
+                    pbMiCartaTiro3.Image = pictureBoxesMazo[i].Image;
+                    lbMiCarta3.Text = labelsCartasMazo[i].Text;
+                    pictureBoxesMazo[i].Image = null;
+                    pbMiCartaTiro3.Enabled = false;
+                    pbMiCartaTiro3.BorderStyle = BorderStyle.None;
+                }
+            }
         }
 
         private void seleccionarCarta1(object sender, EventArgs e)
@@ -273,9 +294,18 @@ namespace FEI_Tactics.Forms
 
         private void activarTableroMisCartas()
         {
-            pbMiCartaTiro1.Enabled = true;
-            pbMiCartaTiro2.Enabled = true;
-            pbMiCartaTiro3.Enabled = true;
+            if(pbMiCartaTiro1.BorderStyle == BorderStyle.FixedSingle)
+            {
+                pbMiCartaTiro1.Enabled = true;
+            }
+            if(pbMiCartaTiro2.BorderStyle == BorderStyle.FixedSingle)
+            {
+                pbMiCartaTiro2.Enabled = true;
+            }
+            if(pbMiCartaTiro3.BorderStyle == BorderStyle.FixedSingle)
+            {
+                pbMiCartaTiro3.Enabled = true;
+            }
         }
     }
 }
