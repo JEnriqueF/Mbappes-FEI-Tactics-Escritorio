@@ -76,9 +76,52 @@ namespace FEI_Tactics.Forms
             }
         }
 
-        private void buttonTerminarTurno_Click(object sender, EventArgs e)
+        private async void buttonTerminarTurno_Click(object sender, EventArgs e)
         {
+            try
+            {
+                PartidaResponse partidaResponse;
+                int cicloPartida = 0;
 
+                for (int i = 0; i < pictureBoxesTableroMisCartas.Count; i++)
+                {
+                    if (pictureBoxesTableroMisCartas[i] != null)
+                    {
+                        pictureBoxesTableroMisCartas[i].BorderStyle = BorderStyle.Fixed3D;
+                    }
+                }
+
+                Movimiento movimiento = new Movimiento();
+                List<Movimiento> listaMovimientos = new List<Movimiento>();
+
+                for (int i = 0; i < pictureBoxesTableroMisCartas.Count; i++)
+                {
+                    if (pictureBoxesTableroMisCartas[i].BorderStyle == BorderStyle.Fixed3D)
+                    {
+                        movimiento.IDEscenario = (int)pictureBoxesTableroMisCartas[i].Tag;
+                        movimiento.IDCarta = int.Parse(labelsCartasMazo[i].Text);
+
+                        listaMovimientos.Add(movimiento);
+                    }
+                }
+
+                do
+                {
+                    partidaResponse = await PartidaService.MandarMovimientosAsync(Jugador.Instancia.Gamertag, listaMovimientos);
+
+                    if (cicloPartida < 4 && !partidaResponse.Respuesta.Equals("Jugador no encontrado en la partida") &&
+                        !partidaResponse.Respuesta.Equals("Ya se jugó un movimiento para Jugador en este turno"))
+                    {
+                        Mensaje.MostrarMensaje("Se aceptó el partidaResponse", "Solicitud aceptada", MessageBoxIcon.Information);
+                        cicloPartida++;
+                    }
+                } while (partidaResponse != null && (partidaResponse.Respuesta.Equals("Ya se jugó un movimiento para Jugador en este turno") || 
+                        !partidaResponse.Respuesta.Equals("Jugador no encontrado en la partida") || partidaResponse.Respuesta.Equals("Turno Jugado")));
+
+            } catch (Exception ex)
+            {
+                Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
+            }
         }
 
         private void VerificarFotosObtenidas()
@@ -153,8 +196,13 @@ namespace FEI_Tactics.Forms
             if (escenarios != null && escenarios.Count > 0)
             {
                 pbEscenario1.Image = ConvertidorImagen.DeBase64AImagen(escenarios[0].Imagen);
+                pbEscenario1.Tag = escenarios[0].IDEscenario;
+
                 pbEscenario2.Image = ConvertidorImagen.DeBase64AImagen(escenarios[1].Imagen);
+                pbEscenario2.Tag = escenarios[1].IDEscenario;
+
                 pbEscenario3.Image = ConvertidorImagen.DeBase64AImagen(escenarios[2].Imagen);
+                pbEscenario3.Tag = escenarios[2].IDEscenario;
             }
             else
             {
@@ -215,14 +263,35 @@ namespace FEI_Tactics.Forms
         {
             for(int i = 0; i < pictureBoxesMazo.Count; i++)
             {
-                if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
+                if (pbMiCartaTiro1.Image == null)
                 {
-                    pbMiCartaTiro1.Image = pictureBoxesMazo[i].Image;
-                    lbMiCarta1.Text = labelsCartasMazo[i].Text;
-                    pictureBoxesMazo[i].Image = null;
-                    pbMiCartaTiro1.Enabled = false;
-                    pbMiCartaTiro1.BorderStyle = BorderStyle.None;
+                    if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
+                    {
+                        pbMiCartaTiro1.Image = pictureBoxesMazo[i].Image;
+                        lbMiCarta1.Text = labelsCartasMazo[i].Text;
+                        pictureBoxesMazo[i].Image = null;
+                        pbMiCartaTiro1.Enabled = false;
+                    }
+                }else if (pbMiCartaTiro1.Image != null)
+                {
+                    for(int inn = 0; inn < labelsCartasMazo.Count; inn++)
+                    {
+                        if (labelsCartasMazo[inn].Text.Equals(lbMiCarta1.Text))
+                        {
+                            pictureBoxesMazo[inn].Image = pbMiCartaTiro1.Image;
+                            break;
+                        }
+                    }
+
+                    if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
+                    {
+                        pbMiCartaTiro1.Image = pictureBoxesMazo[i].Image;
+                        lbMiCarta1.Text = labelsCartasMazo[i].Text;
+                        pictureBoxesMazo[i].Image = null;
+                        pbMiCartaTiro1.Enabled = false;
+                    }
                 }
+                
             }
         }
 
@@ -230,14 +299,35 @@ namespace FEI_Tactics.Forms
         {
             for (int i = 0; i < pictureBoxesMazo.Count; i++)
             {
-                if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
+                if (pbMiCartaTiro2.Image == null)
                 {
-                    pbMiCartaTiro2.Image = pictureBoxesMazo[i].Image;
-                    lbMiCarta2.Text = labelsCartasMazo[i].Text;
-                    pictureBoxesMazo[i].Image = null;
-                    pbMiCartaTiro2.Enabled = false;
-                    pbMiCartaTiro2.BorderStyle = BorderStyle.None;
+                    if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
+                    {
+                        pbMiCartaTiro2.Image = pictureBoxesMazo[i].Image;
+                        lbMiCarta2.Text = labelsCartasMazo[i].Text;
+                        pictureBoxesMazo[i].Image = null;
+                        pbMiCartaTiro2.Enabled = false;
+                    }
+                } else if (pbMiCartaTiro2.Image != null)
+                {
+                    for (int inn = 0; inn < labelsCartasMazo.Count; inn++)
+                    {
+                        if (labelsCartasMazo[inn].Text.Equals(lbMiCarta2.Text))
+                        {
+                            pictureBoxesMazo[inn].Image = pbMiCartaTiro2.Image;
+                            break;
+                        }
+                    }
+
+                    if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
+                    {
+                        pbMiCartaTiro2.Image = pictureBoxesMazo[i].Image;
+                        lbMiCarta2.Text = labelsCartasMazo[i].Text;
+                        pictureBoxesMazo[i].Image = null;
+                        pbMiCartaTiro2.Enabled = false;
+                    }
                 }
+
             }
         }
 
@@ -245,14 +335,35 @@ namespace FEI_Tactics.Forms
         {
             for (int i = 0; i < pictureBoxesMazo.Count; i++)
             {
-                if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
+                if (pbMiCartaTiro3.Image == null)
                 {
-                    pbMiCartaTiro3.Image = pictureBoxesMazo[i].Image;
-                    lbMiCarta3.Text = labelsCartasMazo[i].Text;
-                    pictureBoxesMazo[i].Image = null;
-                    pbMiCartaTiro3.Enabled = false;
-                    pbMiCartaTiro3.BorderStyle = BorderStyle.None;
+                    if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
+                    {
+                        pbMiCartaTiro3.Image = pictureBoxesMazo[i].Image;
+                        lbMiCarta3.Text = labelsCartasMazo[i].Text;
+                        pictureBoxesMazo[i].Image = null;
+                        pbMiCartaTiro3.Enabled = false;
+                    }
+                } else if (pbMiCartaTiro3.Image != null)
+                {
+                    for (int inn = 0; inn < labelsCartasMazo.Count; inn++)
+                    {
+                        if (labelsCartasMazo[inn].Text.Equals(lbMiCarta3.Text))
+                        {
+                            pictureBoxesMazo[inn].Image = pbMiCartaTiro3.Image;
+                            break;
+                        }
+                    }
+
+                    if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
+                    {
+                        pbMiCartaTiro3.Image = pictureBoxesMazo[i].Image;
+                        lbMiCarta3.Text = labelsCartasMazo[i].Text;
+                        pictureBoxesMazo[i].Image = null;
+                        pbMiCartaTiro3.Enabled = false;
+                    }
                 }
+
             }
         }
 

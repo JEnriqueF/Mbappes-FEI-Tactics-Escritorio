@@ -76,6 +76,9 @@
     <Compile Include="Models\Carta.cs" />
     <Compile Include="Models\CartaResponse.cs" />
     <Compile Include="Models\MatchMakingResponse.cs" />
+    <Compile Include="Models\Movimiento.cs" />
+    <Compile Include="Models\PartidaRequest.cs" />
+    <Compile Include="Models\PartidaResponse.cs" />
     <Compile Include="Services\EscenarioService.cs" />
     <Compile Include="Services\JugadorService.cs" />
     <Compile Include="Forms\Configuración.cs">
@@ -119,6 +122,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CartasService.cs" />
     <Compile Include="Services\MatchMakingService.cs" />
+    <Compile Include="Services\PartidaService.cs" />
     <Compile Include="Utilities\ConvertidorImagen.cs" />
     <Compile Include="Utilities\Mensaje.cs" />
     <EmbeddedResource Include="Forms\Configuración.resx">
