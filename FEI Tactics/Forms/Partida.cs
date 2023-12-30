@@ -21,6 +21,9 @@ namespace FEI_Tactics.Forms
         string gamertagOponente;
         List<Escenario> escenarios;
         List<PictureBox> pictureBoxesMazo = new List<PictureBox>();
+        List<Label> labelsCartasMazo = new List<Label>();
+        List<PictureBox> pictureBoxesTableroMisCartas = new List<PictureBox>();
+        List<PictureBox> pictureBoxesTableroOponente = new List<PictureBox>();
 
         public Partida(string gamertagOponente)
         {
@@ -173,6 +176,19 @@ namespace FEI_Tactics.Forms
             pictureBoxesMazo.Add(pbMiCarta3);
             pictureBoxesMazo.Add(pbMiCarta4);
 
+            labelsCartasMazo.Add(lbCartaMazo1);
+            labelsCartasMazo.Add(lbCartaMazo2);
+            labelsCartasMazo.Add(lbCartaMazo3);
+            labelsCartasMazo.Add(lbCartaMazo4);
+
+            pictureBoxesTableroMisCartas.Add(pbMiCartaTiro1);
+            pictureBoxesTableroMisCartas.Add(pbMiCartaTiro2);
+            pictureBoxesTableroMisCartas.Add(pbMiCartaTiro3);
+
+            pictureBoxesTableroOponente.Add(pbCartaEnemigo1);
+            pictureBoxesTableroOponente.Add(pbCartaEnemigo2);
+            pictureBoxesTableroOponente.Add(pbCartaEnemigo3);
+
             int controladorIdCarta = 0;
             foreach (Carta carta in cartas)
             {
@@ -188,10 +204,78 @@ namespace FEI_Tactics.Forms
                     indiceCarta = cartas.FindIndex(x => x.IDCarta == numero);
 
                     pictureBoxesMazo[indiceNumerosMazo].Image = ConvertidorImagen.DeBase64AImagen(cartas[indiceCarta].Imagen);
+                    labelsCartasMazo[indiceNumerosMazo].Text = numero.ToString();
 
                     numerosMazo[indiceNumerosMazo] = 0;
                 }
             }
+        }
+
+        private void insertarCarta1(object sender, EventArgs e)
+        {
+            for(int i = 0; i < pictureBoxesMazo.Count; i++)
+            {
+                if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
+                {
+                    pbMiCartaTiro1.Image = pictureBoxesMazo[i].Image;
+                    lbMiCarta1.Text = lbCartaMazo1.Text;
+                    pictureBoxesMazo[i].Image = null;
+                    pbMiCartaTiro1.Enabled = false;
+                }
+            }
+        }
+
+        private void insertarCarta2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void insertarCarta3(object sender, EventArgs e)
+        {
+
+        }
+
+        private void seleccionarCarta1(object sender, EventArgs e)
+        {
+            deseleccionarCarta();
+            pbMiCarta1.BorderStyle = BorderStyle.FixedSingle;
+            activarTableroMisCartas();
+        }
+
+        private void seleccionarCarta2(object sender, EventArgs e)
+        {
+            deseleccionarCarta();
+            pbMiCarta2.BorderStyle = BorderStyle.FixedSingle;
+            activarTableroMisCartas();
+        }
+
+        private void seleccionarCarta3(object sender, EventArgs e)
+        {
+            deseleccionarCarta();
+            pbMiCarta3.BorderStyle = BorderStyle.FixedSingle;
+            activarTableroMisCartas();
+        }
+
+        private void seleccionarCarta4(object sender, EventArgs e)
+        {
+            deseleccionarCarta();
+            pbMiCarta4.BorderStyle = BorderStyle.FixedSingle;
+            activarTableroMisCartas();
+        }
+
+        private void deseleccionarCarta()
+        {
+            pbMiCarta1.BorderStyle = BorderStyle.None;
+            pbMiCarta2.BorderStyle = BorderStyle.None;
+            pbMiCarta3.BorderStyle = BorderStyle.None;
+            pbMiCarta4.BorderStyle = BorderStyle.None;
+        }
+
+        private void activarTableroMisCartas()
+        {
+            pbMiCartaTiro1.Enabled = true;
+            pbMiCartaTiro2.Enabled = true;
+            pbMiCartaTiro3.Enabled = true;
         }
     }
 }
