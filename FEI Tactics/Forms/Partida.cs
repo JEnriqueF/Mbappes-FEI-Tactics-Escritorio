@@ -22,10 +22,13 @@ namespace FEI_Tactics.Forms
         List<Escenario> escenarios;
         List<PictureBox> pictureBoxesMazo = new List<PictureBox>();
         List<Label> labelsCartasMazo = new List<Label>();
+        List<Label> labelsMiCartaTiro = new List<Label>();
         List<PictureBox> pictureBoxesTableroMisCartas = new List<PictureBox>();
         List<PictureBox> pictureBoxesTableroOponente = new List<PictureBox>();
         List<PictureBox> pictureBoxesEscenarios = new List<PictureBox>();
         List<Carta> cartas = new List<Carta>();
+        int energia = 0;
+        int turno = 0;
 
         public Partida(string gamertagOponente)
         {
@@ -52,29 +55,11 @@ namespace FEI_Tactics.Forms
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        private async void buttonAbandonarPartida_Click(object sender, EventArgs e)
+        private void buttonAbandonarPartida_Click(object sender, EventArgs e)
         {
             if (Mensaje.MostrarMensajeConfirmacion())
             {
-                try
-                {
-                    string respuestaAbandonarPartida = await MatchMakingService.CancelarPartidaAsync(Jugador.Instancia.Gamertag);
-
-                    if (respuestaAbandonarPartida.Equals("Partida cancelada correctamente"))
-                    {
-                        buttonAbandonarPartida.Enabled = false;
-                        buttonTerminarTurno.Enabled = false;
-                        this.Close();
-                    }
-                    else
-                    {
-                        Mensaje.MostrarMensaje("Jugador no encontrado en la partida. No se pudo cancelar.", "Jugador no encontrado", MessageBoxIcon.Error);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
-                }
+                CancelarPartida();
             }
         }
 
@@ -83,11 +68,10 @@ namespace FEI_Tactics.Forms
             try
             {
                 PartidaResponse partidaResponse;
-                int turno = 0;
 
                 for (int i = 0; i < pictureBoxesTableroMisCartas.Count; i++)
                 {
-                    if (pictureBoxesTableroMisCartas[i] != null)
+                    if (pictureBoxesTableroMisCartas[i].Image != null)
                     {
                         pictureBoxesTableroMisCartas[i].BorderStyle = BorderStyle.Fixed3D;
                     }
@@ -100,20 +84,27 @@ namespace FEI_Tactics.Forms
                 {
                     if (pictureBoxesTableroMisCartas[i].BorderStyle == BorderStyle.Fixed3D)
                     {
-                        movimiento.IDEscenario = (int)pictureBoxesTableroMisCartas[i].Tag;
+                        movimiento.IDEscenario = (int) pictureBoxesEscenarios[i].Tag;
                         movimiento.IDCarta = int.Parse(labelsCartasMazo[i].Text);
 
                         listaMovimientos.Add(movimiento);
                     }
                 }
 
+                int cicloPartida = 0;
+
                 do
                 {
+                    if(cicloPartida == 5)
+                    {
+                        CancelarPartida();
+                    }
+
                     partidaResponse = await PartidaService.MandarMovimientosAsync(Jugador.Instancia.Gamertag, listaMovimientos);
 
                     if (turno < 4 && partidaResponse.Respuesta != null && !partidaResponse.Respuesta.Equals("Jugador no encontrado en la partida") )
                     {
-                        break;
+                        cicloPartida++;
                     }else if(turno < 4 && partidaResponse.Respuesta == null)
                     {
                         int indiceCarta;
@@ -131,6 +122,9 @@ namespace FEI_Tactics.Forms
                         }
 
                         turno++;
+                        
+                        energia += 2;
+                        lbEnergia.Text = energia.ToString();
                     }
                 } while (partidaResponse.Respuesta != null && (partidaResponse.Respuesta.Equals("Ya se jugó un movimiento para Jugador en este turno") || 
                         !partidaResponse.Respuesta.Equals("Jugador no encontrado en la partida") || partidaResponse.Respuesta.Equals("Turno Jugado")));
@@ -141,11 +135,33 @@ namespace FEI_Tactics.Forms
             }
         }
 
+        private async void CancelarPartida()
+        {
+            try
+            {
+                string respuestaAbandonarPartida = await MatchMakingService.CancelarPartidaAsync(Jugador.Instancia.Gamertag);
+
+                if (respuestaAbandonarPartida.Equals("Partida cancelada correctamente"))
+                {
+                    buttonAbandonarPartida.Enabled = false;
+                    buttonTerminarTurno.Enabled = false;
+                    this.Close();
+                } else
+                {
+                    Mensaje.MostrarMensaje("Jugador no encontrado en la partida. No se pudo cancelar.", "Jugador no encontrado", MessageBoxIcon.Error);
+                    this.Close();
+                }
+            } catch (Exception ex)
+            {
+                Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
+            }
+        }
+
         private void VerificarFotosObtenidas()
         {
             if (escenariosPartidaInfo == null)
             {
-                buttonTerminarTurno.Enabled = false;
+                buttonTerminarTurno.Enabled = true;
                 buttonAbandonarPartida.Enabled = true;
             }
         }
@@ -250,6 +266,10 @@ namespace FEI_Tactics.Forms
             pictureBoxesTableroMisCartas.Add(pbMiCartaTiro2);
             pictureBoxesTableroMisCartas.Add(pbMiCartaTiro3);
 
+            labelsMiCartaTiro.Add(lbMiCarta1);
+            labelsMiCartaTiro.Add(lbMiCarta2);
+            labelsMiCartaTiro.Add(lbMiCarta2);
+
             pictureBoxesTableroOponente.Add(pbCartaEnemigo1);
             pictureBoxesTableroOponente.Add(pbCartaEnemigo2);
             pictureBoxesTableroOponente.Add(pbCartaEnemigo3);
@@ -274,10 +294,14 @@ namespace FEI_Tactics.Forms
 
                     pictureBoxesMazo[indiceNumerosMazo].Image = ConvertidorImagen.DeBase64AImagen(cartas[indiceCarta].Imagen);
                     labelsCartasMazo[indiceNumerosMazo].Text = numero.ToString();
+                    pictureBoxesMazo[indiceNumerosMazo].Tag = cartas[indiceCarta].Costo;
 
                     numerosMazo[indiceNumerosMazo] = 0;
                 }
             }
+
+            energia = 2;
+            lbEnergia.Text = energia.ToString();
         }
 
         private void insertarCarta1(object sender, EventArgs e)
@@ -290,11 +314,17 @@ namespace FEI_Tactics.Forms
                     {
                         pbMiCartaTiro1.Image = pictureBoxesMazo[i].Image;
                         lbMiCarta1.Text = labelsCartasMazo[i].Text;
+                        
                         pictureBoxesMazo[i].Image = null;
                         pictureBoxesMazo[i].Visible = false;
+                        
                         pbMiCartaTiro1.Enabled = false;
+                        
                         deseleccionarCarta();
                         desactivarTableroMisCartas();
+
+                        energia -= (int) pictureBoxesMazo[i].Tag;
+                        lbEnergia.Text = energia.ToString();
                         return;
                     }
                 }else if (pbMiCartaTiro1.Image != null)
@@ -313,11 +343,17 @@ namespace FEI_Tactics.Forms
                     {
                         pbMiCartaTiro1.Image = pictureBoxesMazo[i].Image;
                         lbMiCarta1.Text = labelsCartasMazo[i].Text;
+                        
                         pictureBoxesMazo[i].Image = null;
                         pictureBoxesMazo[i].Visible = false;
+                        
                         pbMiCartaTiro1.Enabled = false;
+                        
                         deseleccionarCarta();
                         desactivarTableroMisCartas();
+
+                        energia -= (int)pictureBoxesMazo[i].Tag;
+                        lbEnergia.Text = energia.ToString();
                         return;
                     }
                 }
@@ -417,6 +453,11 @@ namespace FEI_Tactics.Forms
 
         private void seleccionarCarta1(object sender, EventArgs e)
         {
+            if ( (int) pbMiCarta1.Tag > energia)
+            {
+                Mensaje.MostrarMensaje("No se puede jugar esta carta porque no tienes suficiente energía.", "Carta excede nivel de energía", MessageBoxIcon.Error);
+                return;
+            }
             deseleccionarCarta();
             pbMiCarta1.BorderStyle = BorderStyle.FixedSingle;
             activarTableroMisCartas();
@@ -424,6 +465,11 @@ namespace FEI_Tactics.Forms
 
         private void seleccionarCarta2(object sender, EventArgs e)
         {
+            if ( (int) pbMiCarta2.Tag > energia)
+            {
+                Mensaje.MostrarMensaje("No se puede jugar esta carta porque no tienes suficiente energía.", "Carta excede nivel de energía", MessageBoxIcon.Error);
+                return;
+            }
             deseleccionarCarta();
             pbMiCarta2.BorderStyle = BorderStyle.FixedSingle;
             activarTableroMisCartas();
@@ -431,6 +477,11 @@ namespace FEI_Tactics.Forms
 
         private void seleccionarCarta3(object sender, EventArgs e)
         {
+            if ( (int) pbMiCarta3.Tag > energia)
+            {
+                Mensaje.MostrarMensaje("No se puede jugar esta carta porque no tienes suficiente energía.", "Carta excede nivel de energía", MessageBoxIcon.Error);
+                return;
+            }
             deseleccionarCarta();
             pbMiCarta3.BorderStyle = BorderStyle.FixedSingle;
             activarTableroMisCartas();
@@ -438,6 +489,11 @@ namespace FEI_Tactics.Forms
 
         private void seleccionarCarta4(object sender, EventArgs e)
         {
+            if ( (int) pbMiCarta4.Tag > energia)
+            {
+                Mensaje.MostrarMensaje("No se puede jugar esta carta porque no tienes suficiente energía.", "Carta excede nivel de energía", MessageBoxIcon.Error);
+                return;
+            }
             deseleccionarCarta();
             pbMiCarta4.BorderStyle = BorderStyle.FixedSingle;
             activarTableroMisCartas();

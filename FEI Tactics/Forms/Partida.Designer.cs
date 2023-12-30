@@ -262,6 +262,7 @@
             // buttonTerminarTurno
             // 
             this.buttonTerminarTurno.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonTerminarTurno.Enabled = false;
             this.buttonTerminarTurno.Location = new System.Drawing.Point(224, 675);
             this.buttonTerminarTurno.Name = "buttonTerminarTurno";
             this.buttonTerminarTurno.Size = new System.Drawing.Size(128, 26);
