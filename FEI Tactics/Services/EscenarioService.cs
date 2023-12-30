@@ -14,9 +14,9 @@ namespace FEI_Tactics.Services
     {
         private const string URL_API = "https://mk2m8b3x-3000.usw3.devtunnels.ms/";
 
-        public static async Task<List<EscenarioResponse>> RecuperarEscenariosAsync()
+        public static async Task<List<Escenario>> RecuperarEscenariosAsync()
         {
-            List<EscenarioResponse> escenarios = new List<EscenarioResponse>();
+            List<Escenario> escenarios = new List<Escenario>();
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -26,19 +26,14 @@ namespace FEI_Tactics.Services
                     if (response.IsSuccessStatusCode)
                     {
                         string responseJson = await response.Content.ReadAsStringAsync();
-                        var responseObj = JsonConvert.DeserializeAnonymousType(responseJson, new { listaEscenarios = new List<EscenarioResponse>() });
-                        escenarios = responseObj.listaEscenarios;
-                    } else if (response.StatusCode == HttpStatusCode.NotFound)
-                    {
-                        escenarios = null;
-                    }
-                    else
+                        var responseObj = JsonConvert.DeserializeAnonymousType(responseJson, new { escenarios = new List<Escenario>() });
+                        escenarios = responseObj.escenarios;
+                    } else
                     {
                         throw new HttpRequestException($"{response.StatusCode} - {response.ReasonPhrase}");
                     }
                 }
-            }
-            catch (HttpRequestException ex)
+            } catch (HttpRequestException ex)
             {
                 throw new Exception("Fallo en la conexión al servidor.", ex);
             }

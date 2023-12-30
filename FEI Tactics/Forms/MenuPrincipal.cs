@@ -90,9 +90,7 @@ namespace FEI_Tactics
                 {
                     buttonCancelar.Visible = false;
                     buttonBuscarPartida.Visible = true;
-                    Partida partida = new Partida();
-                    //TEST
-                    await partida.ObtenerDatosOponente(respuestaSolicitudPartida.Gamertag);
+                    Partida partida = new Partida(respuestaSolicitudPartida.Gamertag);
                     partida.Show();
                 }
             }

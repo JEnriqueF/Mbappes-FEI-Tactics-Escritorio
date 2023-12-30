@@ -77,6 +77,7 @@
             this.pbFotoPerfilEnemigo.Location = new System.Drawing.Point(12, 12);
             this.pbFotoPerfilEnemigo.Name = "pbFotoPerfilEnemigo";
             this.pbFotoPerfilEnemigo.Size = new System.Drawing.Size(84, 84);
+            this.pbFotoPerfilEnemigo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbFotoPerfilEnemigo.TabIndex = 1;
             this.pbFotoPerfilEnemigo.TabStop = false;
             // 
@@ -85,6 +86,7 @@
             this.pbMiCarta4.Location = new System.Drawing.Point(463, 583);
             this.pbMiCarta4.Name = "pbMiCarta4";
             this.pbMiCarta4.Size = new System.Drawing.Size(70, 86);
+            this.pbMiCarta4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbMiCarta4.TabIndex = 2;
             this.pbMiCarta4.TabStop = false;
             // 
@@ -93,6 +95,7 @@
             this.pbMiCarta2.Location = new System.Drawing.Point(187, 583);
             this.pbMiCarta2.Name = "pbMiCarta2";
             this.pbMiCarta2.Size = new System.Drawing.Size(70, 86);
+            this.pbMiCarta2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbMiCarta2.TabIndex = 3;
             this.pbMiCarta2.TabStop = false;
             // 
@@ -101,6 +104,7 @@
             this.pbMiCarta3.Location = new System.Drawing.Point(324, 583);
             this.pbMiCarta3.Name = "pbMiCarta3";
             this.pbMiCarta3.Size = new System.Drawing.Size(70, 86);
+            this.pbMiCarta3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbMiCarta3.TabIndex = 4;
             this.pbMiCarta3.TabStop = false;
             // 
@@ -109,6 +113,7 @@
             this.pbMiCarta1.Location = new System.Drawing.Point(50, 583);
             this.pbMiCarta1.Name = "pbMiCarta1";
             this.pbMiCarta1.Size = new System.Drawing.Size(70, 86);
+            this.pbMiCarta1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbMiCarta1.TabIndex = 5;
             this.pbMiCarta1.TabStop = false;
             // 
@@ -132,49 +137,61 @@
             // 
             // pbCartaEnemigo3
             // 
+            this.pbCartaEnemigo3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbCartaEnemigo3.Location = new System.Drawing.Point(463, 155);
             this.pbCartaEnemigo3.Name = "pbCartaEnemigo3";
             this.pbCartaEnemigo3.Size = new System.Drawing.Size(70, 86);
+            this.pbCartaEnemigo3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCartaEnemigo3.TabIndex = 8;
             this.pbCartaEnemigo3.TabStop = false;
             // 
             // pbCartaEnemigo2
             // 
+            this.pbCartaEnemigo2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbCartaEnemigo2.Location = new System.Drawing.Point(257, 155);
             this.pbCartaEnemigo2.Name = "pbCartaEnemigo2";
             this.pbCartaEnemigo2.Size = new System.Drawing.Size(70, 86);
+            this.pbCartaEnemigo2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCartaEnemigo2.TabIndex = 9;
             this.pbCartaEnemigo2.TabStop = false;
             // 
             // pbCartaEnemigo1
             // 
+            this.pbCartaEnemigo1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbCartaEnemigo1.Location = new System.Drawing.Point(50, 155);
             this.pbCartaEnemigo1.Name = "pbCartaEnemigo1";
             this.pbCartaEnemigo1.Size = new System.Drawing.Size(70, 86);
+            this.pbCartaEnemigo1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCartaEnemigo1.TabIndex = 10;
             this.pbCartaEnemigo1.TabStop = false;
             // 
             // pbMiCartaTiro3
             // 
+            this.pbMiCartaTiro3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbMiCartaTiro3.Location = new System.Drawing.Point(463, 438);
             this.pbMiCartaTiro3.Name = "pbMiCartaTiro3";
             this.pbMiCartaTiro3.Size = new System.Drawing.Size(70, 86);
+            this.pbMiCartaTiro3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbMiCartaTiro3.TabIndex = 11;
             this.pbMiCartaTiro3.TabStop = false;
             // 
             // pbMiCartaTiro2
             // 
+            this.pbMiCartaTiro2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbMiCartaTiro2.Location = new System.Drawing.Point(257, 438);
             this.pbMiCartaTiro2.Name = "pbMiCartaTiro2";
             this.pbMiCartaTiro2.Size = new System.Drawing.Size(70, 86);
+            this.pbMiCartaTiro2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbMiCartaTiro2.TabIndex = 12;
             this.pbMiCartaTiro2.TabStop = false;
             // 
             // pbMiCartaTiro1
             // 
+            this.pbMiCartaTiro1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbMiCartaTiro1.Location = new System.Drawing.Point(50, 438);
             this.pbMiCartaTiro1.Name = "pbMiCartaTiro1";
             this.pbMiCartaTiro1.Size = new System.Drawing.Size(70, 86);
+            this.pbMiCartaTiro1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbMiCartaTiro1.TabIndex = 13;
             this.pbMiCartaTiro1.TabStop = false;
             // 
@@ -183,6 +200,7 @@
             this.pbEscenario3.Location = new System.Drawing.Point(451, 285);
             this.pbEscenario3.Name = "pbEscenario3";
             this.pbEscenario3.Size = new System.Drawing.Size(90, 110);
+            this.pbEscenario3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbEscenario3.TabIndex = 14;
             this.pbEscenario3.TabStop = false;
             // 
@@ -191,6 +209,7 @@
             this.pbEscenario2.Location = new System.Drawing.Point(246, 285);
             this.pbEscenario2.Name = "pbEscenario2";
             this.pbEscenario2.Size = new System.Drawing.Size(90, 110);
+            this.pbEscenario2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbEscenario2.TabIndex = 15;
             this.pbEscenario2.TabStop = false;
             // 
@@ -199,6 +218,7 @@
             this.pbEscenario1.Location = new System.Drawing.Point(40, 285);
             this.pbEscenario1.Name = "pbEscenario1";
             this.pbEscenario1.Size = new System.Drawing.Size(90, 110);
+            this.pbEscenario1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbEscenario1.TabIndex = 16;
             this.pbEscenario1.TabStop = false;
             // 

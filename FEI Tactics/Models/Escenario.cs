@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,12 +10,14 @@ namespace FEI_Tactics.Models
 {
     public class Escenario
     {
+        [JsonProperty("IDEscenario")]
         public int IDEscenario { get; set; }
-        public Image Imagen { get; set; }
+        [JsonProperty("Imagen")]
+        public string Imagen { get; set; }
 
         public Escenario() { }
 
-        public Escenario(int IDEscenario, Image Imagen)
+        public Escenario(int IDEscenario, string Imagen)
         {
             this.IDEscenario = IDEscenario;
             this.Imagen = Imagen;

@@ -18,16 +18,32 @@ namespace FEI_Tactics.Forms
         JugadorResponse oponente;
         FotoPerfilResponse fotoPerfilOponente;
         List<Escenario> escenariosPartidaInfo;
+        string gamertagOponente;
+        List<Escenario> escenarios;
+        List<PictureBox> pictureBoxesMazo = new List<PictureBox>();
 
-        public Partida()
+        public Partida(string gamertagOponente)
         {
             InitializeComponent();
-            RecuperarEscenariosInfoAsync().ContinueWith(t =>
+            this.gamertagOponente = gamertagOponente;
+            EstablecerOrdenEjecucion();
+        }
+
+        private void EstablecerOrdenEjecucion()
+        {
+            ObtenerDatosOponente(gamertagOponente)
+            .ContinueWith(t =>
+            {
+                return RecuperarEscenariosInfoAsync();
+            }, TaskScheduler.FromCurrentSynchronizationContext())
+            .Unwrap()
+            .ContinueWith(t =>
             {
                 CargarImagenesEscenarios();
                 buttonTerminarTurno.Enabled = true;
                 buttonAbandonarPartida.Enabled = true;
                 VerificarFotosObtenidas();
+                CargarMazo();
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
@@ -105,6 +121,7 @@ namespace FEI_Tactics.Forms
                         Image image = ConvertidorImagen.DeBase64AImagen(fotoPerfil.Foto);
                         fotoPerfilOponente = new FotoPerfilResponse(fotoPerfil.IDFoto, image);
                         pbFotoPerfilEnemigo.Image = fotoPerfilOponente.Foto;
+                        return;
                     }
                 }
             }
@@ -118,14 +135,7 @@ namespace FEI_Tactics.Forms
         {
             try
             {
-                List<EscenarioResponse> escenarios = await EscenarioService.RecuperarEscenariosAsync();
-                escenariosPartidaInfo = new List<Escenario>();
-
-                foreach (var escenario in escenarios)
-                {
-                    Image image = ConvertidorImagen.DeBase64AImagen(escenario.Imagen);
-                    escenariosPartidaInfo.Add(new Escenario(escenario.IDEscenario, image));
-                }
+                escenarios = await EscenarioService.RecuperarEscenariosAsync();
             }
             catch (Exception ex)
             {
@@ -137,36 +147,51 @@ namespace FEI_Tactics.Forms
 
         public void CargarImagenesEscenarios()
         {
-            if (escenariosPartidaInfo != null && escenariosPartidaInfo.Count > 0)
+            if (escenarios != null && escenarios.Count > 0)
             {
-                pbEscenario1.Image = escenariosPartidaInfo[0].Imagen;
-                pbEscenario2.Image = escenariosPartidaInfo[1].Imagen;
-                pbEscenario3.Image = escenariosPartidaInfo[2].Imagen;
+                pbEscenario1.Image = ConvertidorImagen.DeBase64AImagen(escenarios[0].Imagen);
+                pbEscenario2.Image = ConvertidorImagen.DeBase64AImagen(escenarios[1].Imagen);
+                pbEscenario3.Image = ConvertidorImagen.DeBase64AImagen(escenarios[2].Imagen);
             }
             else
             {
-                Label labelSinContenido = new Label();
-                labelSinContenido.Text = "Sin contenido.";
-                labelSinContenido.ForeColor = Color.Red;
-                labelSinContenido.BackColor = Color.Transparent;
-                labelSinContenido.Location = new Point(pbEscenario1.Width / 2 - labelSinContenido.Width / 2, pbEscenario1.Height / 2 - labelSinContenido.Height / 2);
-                pbEscenario1.Controls.Add(labelSinContenido);
-
-                Label labelSinContenido2 = new Label();
-                labelSinContenido2.Text = "Sin contenido.";
-                labelSinContenido2.ForeColor = Color.Red;
-                labelSinContenido2.BackColor = Color.Transparent;
-                labelSinContenido2.Location = new Point(pbEscenario1.Width / 2 - labelSinContenido2.Width / 2, pbEscenario1.Height / 2 - labelSinContenido2.Height / 2);
-                pbEscenario1.Controls.Add(labelSinContenido2);
-
-                Label labelSinContenido3 = new Label();
-                labelSinContenido3.Text = "Sin contenido.";
-                labelSinContenido3.ForeColor = Color.Red;
-                labelSinContenido3.BackColor = Color.Transparent;
-                labelSinContenido3.Location = new Point(pbEscenario1.Width / 2 - labelSinContenido3.Width / 2, pbEscenario1.Height / 2 - labelSinContenido3.Height / 2);
-                pbEscenario1.Controls.Add(labelSinContenido3);
+                Mensaje.MostrarMensaje("No existen escenarios.", "Error al recuperar los escenarios", MessageBoxIcon.Error);
             }
         }
 
+        public void CargarMazo()
+        {
+            int[] numerosMazo = Jugador.Instancia.Mazo.Split(',').Select(s => Convert.ToInt32(s.Trim())).ToArray();
+            int indiceNumerosMazo = 0;
+            List<Carta> cartas = Carta.Instancia;
+            int indiceCarta = 0;
+
+            int[] idCartas = new int[cartas.Count];
+
+            pictureBoxesMazo.Add(pbMiCarta1);
+            pictureBoxesMazo.Add(pbMiCarta2);
+            pictureBoxesMazo.Add(pbMiCarta3);
+            pictureBoxesMazo.Add(pbMiCarta4);
+
+            int controladorIdCarta = 0;
+            foreach (Carta carta in cartas)
+            {
+                idCartas[controladorIdCarta] = carta.IDCarta;
+                controladorIdCarta++;
+            }
+
+            foreach(int numero in idCartas)
+            {
+                if (Jugador.Instancia.Mazo.Contains(numero.ToString()) && numero != 0)
+                {
+                    indiceNumerosMazo = Array.IndexOf(numerosMazo, numero);
+                    indiceCarta = cartas.FindIndex(x => x.IDCarta == numero);
+
+                    pictureBoxesMazo[indiceNumerosMazo].Image = ConvertidorImagen.DeBase64AImagen(cartas[indiceCarta].Imagen);
+
+                    numerosMazo[indiceNumerosMazo] = 0;
+                }
+            }
+        }
     }
 }

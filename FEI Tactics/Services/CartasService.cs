@@ -25,9 +25,6 @@ namespace FEI_Tactics.Services
 
                     if (response.IsSuccessStatusCode)
                     {
-                        /*string responseJson = await response.Content.ReadAsStringAsync();
-                        mazo = JsonConvert.DeserializeObject<List<CartaResponse>>(responseJson);*/
-
                         string responseJson = await response.Content.ReadAsStringAsync();
                         var responseObj = JsonConvert.DeserializeAnonymousType(responseJson, new { cartas = new List<Carta>() });
                         cartas = responseObj.cartas;

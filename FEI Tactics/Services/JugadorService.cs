@@ -189,8 +189,42 @@ namespace FEI_Tactics
             }
         }
 
-        //TEST
         public static async Task<JugadorResponse> RecuperarOponenteAsync(string gamertag)
+        {
+            JugadorResponse jugadorOponente = new JugadorResponse();
+
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var requestData = new
+                    {
+                        Gamertag = gamertag
+                    };
+                    string jsonData = JsonConvert.SerializeObject(requestData);
+                    StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PostAsync($"{URL_API}jugador/recuperaroponente", content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseJson = await response.Content.ReadAsStringAsync();
+                        jugadorOponente = JsonConvert.DeserializeObject<JugadorResponse>(responseJson);
+                    } else if (response.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        jugadorOponente = null;
+                    } else
+                    {
+                        throw new HttpRequestException($"{response.StatusCode} - {response.ReasonPhrase}");
+                    }
+                }
+            } catch (HttpRequestException ex)
+            {
+                throw new Exception("Fallo en la conexión al servidor.", ex);
+            }
+            return jugadorOponente;
+        }
+
+        //TEST
+        /*public static async Task<JugadorResponse> RecuperarOponenteAsync(string gamertag)
         {
             JugadorResponse oponente = new JugadorResponse();
 
@@ -202,37 +236,27 @@ namespace FEI_Tactics
                     var requestData = new { Gamertag = gamertag };
                     string jsonData = JsonConvert.SerializeObject(requestData);
                     StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-                    HttpRequestMessage request = new HttpRequestMessage
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = new Uri(apiUrl),
-                        Content = content
-                    };
-
-                    HttpResponseMessage response = await client.SendAsync(request);
+                    HttpResponseMessage response = await client.PostAsync(apiUrl, content);
 
                     if (response.IsSuccessStatusCode)
                     {
                         string responseJson = await response.Content.ReadAsStringAsync();
                         oponente = JsonConvert.DeserializeObject<JugadorResponse>(responseJson);
-                    }
-                    else if (response.StatusCode == HttpStatusCode.NotFound)
+                    } else if (response.StatusCode == HttpStatusCode.NotFound)
                     {
                         oponente = null;
-                    }
-                    else
+                    } else
                     {
                         throw new HttpRequestException($"{response.StatusCode} - {response.ReasonPhrase}");
                     }
                 }
-            }
-            catch (Exception ex)
+            } catch (Exception ex)
             {
                 throw new Exception("Fallo en la conexión al servidor.", ex);
             }
 
             return oponente;
-        }
+        }*/
 
     }
 }
