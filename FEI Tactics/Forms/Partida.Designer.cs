@@ -262,7 +262,6 @@
             // buttonTerminarTurno
             // 
             this.buttonTerminarTurno.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonTerminarTurno.Enabled = false;
             this.buttonTerminarTurno.Location = new System.Drawing.Point(224, 675);
             this.buttonTerminarTurno.Name = "buttonTerminarTurno";
             this.buttonTerminarTurno.Size = new System.Drawing.Size(128, 26);
@@ -417,8 +416,7 @@
             // 
             // Partida
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(580, 705);
             this.Controls.Add(this.lbPoderOponente3);
             this.Controls.Add(this.lbMiPoder2);
