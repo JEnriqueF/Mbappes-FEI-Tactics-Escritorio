@@ -86,9 +86,9 @@ namespace FEI_Tactics.Forms
 
                 for (int i = 0; i < pictureBoxesTableroMisCartas.Count; i++)
                 {
-                    if (pictureBoxesTableroMisCartas[i].BorderStyle == BorderStyle.Fixed3D && (bool)pictureBoxesTableroMisCartas[i].Tag != true)
+                    if (!labelsMiCartaTiro[i].Text.Equals("0"))
                     {
-                        if ( !labelsMiCartaTiro[i].Text.Equals("0"))
+                        if (pictureBoxesTableroMisCartas[i].BorderStyle == BorderStyle.Fixed3D && (bool)pictureBoxesTableroMisCartas[i].Tag != true)
                         {
                             movimiento.IDEscenario = (int)pictureBoxesEscenarios[i].Tag;
                             movimiento.IDCarta = int.Parse(labelsMiCartaTiro[i].Text);
@@ -96,13 +96,13 @@ namespace FEI_Tactics.Forms
                             pictureBoxesTableroMisCartas[i].Tag = true;
 
                             listaMovimientos.Add(movimiento);
-                        }else if (labelsMiCartaTiro[i].Text.Equals("0"))
-                        {
-                            movimiento.IDEscenario = 0;
-                            movimiento.IDCarta = 0;
-
-                            listaMovimientos.Add(movimiento);
                         }
+                    } else if (labelsMiCartaTiro[i].Text.Equals("0"))
+                    {
+                        movimiento.IDEscenario = 0;
+                        movimiento.IDCarta = 0;
+
+                        listaMovimientos.Add(movimiento);
                     }
                 }
 
