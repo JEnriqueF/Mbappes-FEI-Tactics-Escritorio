@@ -62,6 +62,10 @@
             this.lbPoderOponente2 = new System.Windows.Forms.Label();
             this.lbMiPoder2 = new System.Windows.Forms.Label();
             this.lbPoderOponente3 = new System.Windows.Forms.Label();
+            this.lbPoder1 = new System.Windows.Forms.Label();
+            this.lbPoder2 = new System.Windows.Forms.Label();
+            this.lbPoder3 = new System.Windows.Forms.Label();
+            this.lbPoder4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbFotoPerfilEnemigo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMiCarta4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMiCarta2)).BeginInit();
@@ -276,32 +280,32 @@
             this.lbMiCarta1.AutoSize = true;
             this.lbMiCarta1.Location = new System.Drawing.Point(63, 527);
             this.lbMiCarta1.Name = "lbMiCarta1";
-            this.lbMiCarta1.Size = new System.Drawing.Size(44, 16);
+            this.lbMiCarta1.Size = new System.Drawing.Size(14, 16);
             this.lbMiCarta1.TabIndex = 19;
-            this.lbMiCarta1.Text = "label1";
+            this.lbMiCarta1.Text = "0";
             // 
             // lbMiCarta2
             // 
             this.lbMiCarta2.AutoSize = true;
             this.lbMiCarta2.Location = new System.Drawing.Point(268, 527);
             this.lbMiCarta2.Name = "lbMiCarta2";
-            this.lbMiCarta2.Size = new System.Drawing.Size(44, 16);
+            this.lbMiCarta2.Size = new System.Drawing.Size(14, 16);
             this.lbMiCarta2.TabIndex = 20;
-            this.lbMiCarta2.Text = "label4";
+            this.lbMiCarta2.Text = "0";
             // 
             // lbMiCarta3
             // 
             this.lbMiCarta3.AutoSize = true;
             this.lbMiCarta3.Location = new System.Drawing.Point(477, 527);
             this.lbMiCarta3.Name = "lbMiCarta3";
-            this.lbMiCarta3.Size = new System.Drawing.Size(44, 16);
+            this.lbMiCarta3.Size = new System.Drawing.Size(14, 16);
             this.lbMiCarta3.TabIndex = 21;
-            this.lbMiCarta3.Text = "label5";
+            this.lbMiCarta3.Text = "0";
             // 
             // lbCartaMazo4
             // 
             this.lbCartaMazo4.AutoSize = true;
-            this.lbCartaMazo4.Location = new System.Drawing.Point(477, 564);
+            this.lbCartaMazo4.Location = new System.Drawing.Point(442, 564);
             this.lbCartaMazo4.Name = "lbCartaMazo4";
             this.lbCartaMazo4.Size = new System.Drawing.Size(44, 16);
             this.lbCartaMazo4.TabIndex = 22;
@@ -310,7 +314,7 @@
             // lbCartaMazo3
             // 
             this.lbCartaMazo3.AutoSize = true;
-            this.lbCartaMazo3.Location = new System.Drawing.Point(338, 564);
+            this.lbCartaMazo3.Location = new System.Drawing.Point(308, 564);
             this.lbCartaMazo3.Name = "lbCartaMazo3";
             this.lbCartaMazo3.Size = new System.Drawing.Size(44, 16);
             this.lbCartaMazo3.TabIndex = 23;
@@ -319,7 +323,7 @@
             // lbCartaMazo2
             // 
             this.lbCartaMazo2.AutoSize = true;
-            this.lbCartaMazo2.Location = new System.Drawing.Point(204, 567);
+            this.lbCartaMazo2.Location = new System.Drawing.Point(171, 564);
             this.lbCartaMazo2.Name = "lbCartaMazo2";
             this.lbCartaMazo2.Size = new System.Drawing.Size(44, 16);
             this.lbCartaMazo2.TabIndex = 24;
@@ -328,7 +332,7 @@
             // lbCartaMazo1
             // 
             this.lbCartaMazo1.AutoSize = true;
-            this.lbCartaMazo1.Location = new System.Drawing.Point(63, 567);
+            this.lbCartaMazo1.Location = new System.Drawing.Point(26, 564);
             this.lbCartaMazo1.Name = "lbCartaMazo1";
             this.lbCartaMazo1.Size = new System.Drawing.Size(44, 16);
             this.lbCartaMazo1.TabIndex = 25;
@@ -408,10 +412,50 @@
             this.lbPoderOponente3.TabIndex = 33;
             this.lbPoderOponente3.Text = "0";
             // 
+            // lbPoder1
+            // 
+            this.lbPoder1.AutoSize = true;
+            this.lbPoder1.Location = new System.Drawing.Point(76, 564);
+            this.lbPoder1.Name = "lbPoder1";
+            this.lbPoder1.Size = new System.Drawing.Size(44, 16);
+            this.lbPoder1.TabIndex = 34;
+            this.lbPoder1.Text = "label1";
+            // 
+            // lbPoder2
+            // 
+            this.lbPoder2.AutoSize = true;
+            this.lbPoder2.Location = new System.Drawing.Point(221, 564);
+            this.lbPoder2.Name = "lbPoder2";
+            this.lbPoder2.Size = new System.Drawing.Size(44, 16);
+            this.lbPoder2.TabIndex = 35;
+            this.lbPoder2.Text = "label1";
+            // 
+            // lbPoder3
+            // 
+            this.lbPoder3.AutoSize = true;
+            this.lbPoder3.Location = new System.Drawing.Point(358, 564);
+            this.lbPoder3.Name = "lbPoder3";
+            this.lbPoder3.Size = new System.Drawing.Size(44, 16);
+            this.lbPoder3.TabIndex = 36;
+            this.lbPoder3.Text = "label1";
+            // 
+            // lbPoder4
+            // 
+            this.lbPoder4.AutoSize = true;
+            this.lbPoder4.Location = new System.Drawing.Point(497, 564);
+            this.lbPoder4.Name = "lbPoder4";
+            this.lbPoder4.Size = new System.Drawing.Size(44, 16);
+            this.lbPoder4.TabIndex = 37;
+            this.lbPoder4.Text = "label1";
+            // 
             // Partida
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(580, 705);
+            this.Controls.Add(this.lbPoder4);
+            this.Controls.Add(this.lbPoder3);
+            this.Controls.Add(this.lbPoder2);
+            this.Controls.Add(this.lbPoder1);
             this.Controls.Add(this.lbPoderOponente3);
             this.Controls.Add(this.lbMiPoder2);
             this.Controls.Add(this.lbPoderOponente2);
@@ -504,5 +548,9 @@
         private System.Windows.Forms.Label lbPoderOponente2;
         private System.Windows.Forms.Label lbMiPoder2;
         private System.Windows.Forms.Label lbPoderOponente3;
+        private System.Windows.Forms.Label lbPoder1;
+        private System.Windows.Forms.Label lbPoder2;
+        private System.Windows.Forms.Label lbPoder3;
+        private System.Windows.Forms.Label lbPoder4;
     }
 }

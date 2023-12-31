@@ -23,12 +23,14 @@ namespace FEI_Tactics.Forms
         List<PictureBox> pictureBoxesMazo = new List<PictureBox>();
         List<Label> labelsCartasMazo = new List<Label>();
         List<Label> labelsMiCartaTiro = new List<Label>();
+        List<Label> labelsPoder = new List<Label>();
         List<PictureBox> pictureBoxesTableroMisCartas = new List<PictureBox>();
         List<PictureBox> pictureBoxesTableroOponente = new List<PictureBox>();
         List<PictureBox> pictureBoxesEscenarios = new List<PictureBox>();
         List<Carta> cartas = new List<Carta>();
         int energia = 0;
-        int turno = 0;
+        int turno = 1;
+        int costoCartaRemovida = 0;
 
         public Partida(string gamertagOponente)
         {
@@ -65,6 +67,8 @@ namespace FEI_Tactics.Forms
 
         private async void buttonTerminarTurno_Click(object sender, EventArgs e)
         {
+            buttonTerminarTurno.Enabled = false;
+
             try
             {
                 PartidaResponse partidaResponse;
@@ -84,12 +88,21 @@ namespace FEI_Tactics.Forms
                 {
                     if (pictureBoxesTableroMisCartas[i].BorderStyle == BorderStyle.Fixed3D && (bool)pictureBoxesTableroMisCartas[i].Tag != true)
                     {
-                        movimiento.IDEscenario = (int)pictureBoxesEscenarios[i].Tag;
-                        movimiento.IDCarta = int.Parse(labelsMiCartaTiro[i].Text);
+                        if ( !labelsMiCartaTiro[i].Text.Equals("0"))
+                        {
+                            movimiento.IDEscenario = (int)pictureBoxesEscenarios[i].Tag;
+                            movimiento.IDCarta = int.Parse(labelsMiCartaTiro[i].Text);
 
-                        pictureBoxesTableroMisCartas[i].Tag = true;
+                            pictureBoxesTableroMisCartas[i].Tag = true;
 
-                        listaMovimientos.Add(movimiento);
+                            listaMovimientos.Add(movimiento);
+                        }else if (labelsMiCartaTiro[i].Text.Equals("0"))
+                        {
+                            movimiento.IDEscenario = 0;
+                            movimiento.IDCarta = 0;
+
+                            listaMovimientos.Add(movimiento);
+                        }
                     }
                 }
 
@@ -130,10 +143,14 @@ namespace FEI_Tactics.Forms
 
                 energia += 2;
                 lbEnergia.Text = energia.ToString();
+
+                Mensaje.MostrarMensaje("Turno jugado.", "Jugado", MessageBoxIcon.Information);
             } catch (Exception ex)
             {
                 Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
             }
+
+            buttonTerminarTurno.Enabled = true;
         }
 
         private async void CancelarPartida()
@@ -263,6 +280,11 @@ namespace FEI_Tactics.Forms
             labelsCartasMazo.Add(lbCartaMazo3);
             labelsCartasMazo.Add(lbCartaMazo4);
 
+            labelsPoder.Add(lbPoder1);
+            labelsPoder.Add(lbPoder2);
+            labelsPoder.Add(lbPoder3);
+            labelsPoder.Add(lbPoder4);
+
             pbMiCartaTiro1.Tag = false;
             pbMiCartaTiro2.Tag = false;
             pbMiCartaTiro3.Tag = false;
@@ -300,6 +322,7 @@ namespace FEI_Tactics.Forms
                     pictureBoxesMazo[indiceNumerosMazo].Image = ConvertidorImagen.DeBase64AImagen(cartas[indiceCarta].Imagen);
                     labelsCartasMazo[indiceNumerosMazo].Text = numero.ToString();
                     pictureBoxesMazo[indiceNumerosMazo].Tag = cartas[indiceCarta].Costo;
+                    labelsPoder[indiceNumerosMazo].Text = cartas[indiceCarta].Poder.ToString();
 
                     numerosMazo[indiceNumerosMazo] = 0;
                 }
@@ -330,6 +353,8 @@ namespace FEI_Tactics.Forms
 
                         energia -= (int) pictureBoxesMazo[i].Tag;
                         lbEnergia.Text = energia.ToString();
+
+                        lbMiPoder1.Text = labelsPoder[i].Text;
                         return;
                     }
                 }else if (pbMiCartaTiro1.Image != null)
@@ -340,12 +365,16 @@ namespace FEI_Tactics.Forms
                         {
                             pictureBoxesMazo[inn].Image = pbMiCartaTiro1.Image;
                             pictureBoxesMazo[inn].Visible = true;
+                            costoCartaRemovida = (int) pictureBoxesMazo[inn].Tag;
                             break;
                         }
                     }
 
                     if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
                     {
+                        energia += costoCartaRemovida;
+                        lbEnergia.Text = energia.ToString();
+
                         pbMiCartaTiro1.Image = pictureBoxesMazo[i].Image;
                         lbMiCarta1.Text = labelsCartasMazo[i].Text;
                         
@@ -359,6 +388,8 @@ namespace FEI_Tactics.Forms
 
                         energia -= (int)pictureBoxesMazo[i].Tag;
                         lbEnergia.Text = energia.ToString();
+
+                        lbMiPoder1.Text = labelsPoder[i].Text;
                         return;
                     }
                 }
@@ -387,6 +418,8 @@ namespace FEI_Tactics.Forms
 
                         energia -= (int)pictureBoxesMazo[i].Tag;
                         lbEnergia.Text = energia.ToString();
+
+                        lbMiPoder2.Text = labelsPoder[i].Text;
                         return;
                     }
                 } else if (pbMiCartaTiro2.Image != null)
@@ -397,12 +430,16 @@ namespace FEI_Tactics.Forms
                         {
                             pictureBoxesMazo[inn].Image = pbMiCartaTiro2.Image;
                             pictureBoxesMazo[inn].Visible = true;
+                            costoCartaRemovida = (int)pictureBoxesMazo[inn].Tag;
                             break;
                         }
                     }
 
                     if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
                     {
+                        energia += costoCartaRemovida;
+                        lbEnergia.Text = energia.ToString();
+
                         pbMiCartaTiro2.Image = pictureBoxesMazo[i].Image;
                         lbMiCarta2.Text = labelsCartasMazo[i].Text;
                         
@@ -416,6 +453,8 @@ namespace FEI_Tactics.Forms
 
                         energia -= (int)pictureBoxesMazo[i].Tag;
                         lbEnergia.Text = energia.ToString();
+
+                        lbMiPoder2.Text = labelsPoder[i].Text;
                         return;
                     }
                 }
@@ -444,6 +483,8 @@ namespace FEI_Tactics.Forms
 
                         energia -= (int)pictureBoxesMazo[i].Tag;
                         lbEnergia.Text = energia.ToString();
+
+                        lbMiPoder3.Text = labelsPoder[i].Text;
                         return;
                     }
                 } else if (pbMiCartaTiro3.Image != null)
@@ -454,12 +495,16 @@ namespace FEI_Tactics.Forms
                         {
                             pictureBoxesMazo[inn].Image = pbMiCartaTiro3.Image;
                             pictureBoxesMazo[inn].Visible = true;
+                            costoCartaRemovida = (int)pictureBoxesMazo[inn].Tag;
                             break;
                         }
                     }
 
                     if (pictureBoxesMazo[i].BorderStyle == BorderStyle.FixedSingle)
                     {
+                        energia += costoCartaRemovida;
+                        lbEnergia.Text = energia.ToString();
+
                         pbMiCartaTiro3.Image = pictureBoxesMazo[i].Image;
                         lbMiCarta3.Text = labelsCartasMazo[i].Text;
                         
@@ -473,6 +518,8 @@ namespace FEI_Tactics.Forms
 
                         energia -= (int)pictureBoxesMazo[i].Tag;
                         lbEnergia.Text = energia.ToString();
+
+                        lbMiPoder3.Text = labelsPoder[i].Text;
                         return;
                     }
                 }
