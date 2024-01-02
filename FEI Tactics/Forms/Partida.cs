@@ -24,6 +24,7 @@ namespace FEI_Tactics.Forms
         List<Label> labelsCartasMazo = new List<Label>();
         List<Label> labelsMiCartaTiro = new List<Label>();
         List<Label> labelsPoder = new List<Label>();
+        List<Label> labelsPoderOponente = new List<Label>();
         List<PictureBox> pictureBoxesTableroMisCartas = new List<PictureBox>();
         List<PictureBox> pictureBoxesTableroOponente = new List<PictureBox>();
         List<PictureBox> pictureBoxesEscenarios = new List<PictureBox>();
@@ -97,7 +98,7 @@ namespace FEI_Tactics.Forms
 
                             listaMovimientos.Add(movimiento);
                         }
-                    } else if (labelsMiCartaTiro[i].Text.Equals("0"))
+                    } else if (labelsMiCartaTiro[i].Text.Equals("0") && ((bool)pbMiCartaTiro1.Tag != true || (bool)pbMiCartaTiro2.Tag != true || (bool)pbMiCartaTiro3.Tag != true))
                     {
                         movimiento.IDEscenario = 0;
                         movimiento.IDCarta = 0;
@@ -131,6 +132,7 @@ namespace FEI_Tactics.Forms
                                 {
                                     indiceCarta = cartas.FindIndex(x => x.IDCarta == partidaResponse.listaMovimientos[y].IDCarta);
                                     pictureBoxesTableroOponente[i].Image = ConvertidorImagen.DeBase64AImagen( cartas[indiceCarta].Imagen );
+                                    labelsPoderOponente[i].Text = cartas[indiceCarta].Poder.ToString();
                                     break;
                                 }
                             }
@@ -148,6 +150,28 @@ namespace FEI_Tactics.Forms
             } catch (Exception ex)
             {
                 Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
+            }
+
+            if(turno == 4)
+            {
+                int totalMisPuntos = 0, totalPuntosOponente = 0;
+
+                totalMisPuntos += int.Parse(lbMiPoder1.Text) + int.Parse(lbMiPoder2.Text) + int.Parse(lbMiPoder3.Text);
+                totalPuntosOponente += int.Parse(lbPoderOponente1.Text) + int.Parse(lbPoderOponente2.Text) + int.Parse(lbPoderOponente3.Text);
+
+                if(totalMisPuntos > totalPuntosOponente)
+                {
+                    Mensaje.MostrarMensaje("¡Has ganado!", "¡Felicidades!", MessageBoxIcon.Exclamation);
+                    CancelarPartida();
+                } else if(totalMisPuntos < totalPuntosOponente)
+                {
+                    Mensaje.MostrarMensaje("Has perdido", "Suerte la próxima vez", MessageBoxIcon.Exclamation);
+                    CancelarPartida();
+                }else if(totalMisPuntos == totalPuntosOponente)
+                {
+                    Mensaje.MostrarMensaje("¡Empate!", "¡Reñido!", MessageBoxIcon.Exclamation);
+                    CancelarPartida();
+                }
             }
 
             buttonTerminarTurno.Enabled = true;
@@ -284,6 +308,10 @@ namespace FEI_Tactics.Forms
             labelsPoder.Add(lbPoder2);
             labelsPoder.Add(lbPoder3);
             labelsPoder.Add(lbPoder4);
+
+            labelsPoderOponente.Add(lbPoderOponente1);
+            labelsPoderOponente.Add(lbPoderOponente2);
+            labelsPoderOponente.Add(lbPoderOponente3);
 
             pbMiCartaTiro1.Tag = false;
             pbMiCartaTiro2.Tag = false;
