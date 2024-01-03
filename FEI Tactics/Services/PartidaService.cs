@@ -30,7 +30,6 @@ namespace FEI_Tactics.Services
                     string jsonData = JsonConvert.SerializeObject(requestData);
                     StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                     HttpResponseMessage response = await client.PostAsync($"{URL_API}matchmaking/jugarturno", content);
-                    await Task.Delay(10000);
 
                     if (response.IsSuccessStatusCode)
                     {

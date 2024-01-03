@@ -82,8 +82,9 @@ namespace FEI_Tactics.Forms
                     }
                 }
 
-                Movimiento movimiento = new Movimiento();
+                Movimiento movimiento;
                 List<Movimiento> listaMovimientos = new List<Movimiento>();
+                bool movimientoRegistrado = false;
 
                 for (int i = 0; i < pictureBoxesTableroMisCartas.Count; i++)
                 {
@@ -91,20 +92,28 @@ namespace FEI_Tactics.Forms
                     {
                         if (pictureBoxesTableroMisCartas[i].BorderStyle == BorderStyle.Fixed3D && (bool)pictureBoxesTableroMisCartas[i].Tag != true)
                         {
+                            movimiento = new Movimiento();
+
                             movimiento.IDEscenario = (int)pictureBoxesEscenarios[i].Tag;
                             movimiento.IDCarta = int.Parse(labelsMiCartaTiro[i].Text);
 
                             pictureBoxesTableroMisCartas[i].Tag = true;
 
                             listaMovimientos.Add(movimiento);
-                        }
-                    } else if (labelsMiCartaTiro[i].Text.Equals("0") && ((bool)pbMiCartaTiro1.Tag != true || (bool)pbMiCartaTiro2.Tag != true || (bool)pbMiCartaTiro3.Tag != true))
-                    {
-                        movimiento.IDEscenario = 0;
-                        movimiento.IDCarta = 0;
 
-                        listaMovimientos.Add(movimiento);
+                            movimientoRegistrado = true;
+                        }
                     }
+                }
+
+                if(!movimientoRegistrado)
+                {
+                    movimiento = new Movimiento();
+
+                    movimiento.IDEscenario = 0;
+                    movimiento.IDCarta = 0;
+
+                    listaMovimientos.Add(movimiento);
                 }
 
                 int cicloPartida = 0;
@@ -117,21 +126,25 @@ namespace FEI_Tactics.Forms
                     }
 
                     partidaResponse = await PartidaService.MandarMovimientosAsync(Jugador.Instancia.Gamertag, listaMovimientos);
+                    await Task.Delay(5000);
 
-                    if (turno < 4 && partidaResponse.Respuesta != null && !partidaResponse.Respuesta.Equals("Jugador no encontrado en la partida") )
+                    if (turno < 4 && partidaResponse.Respuesta != null && !partidaResponse.Respuesta.Equals("Jugador no encontrado en la partida"))
                     {
                         cicloPartida++;
-                    }else if(turno < 4 && partidaResponse.Respuesta == null)
+                    } else if (turno < 4 && partidaResponse.Respuesta != null && partidaResponse.Respuesta.Equals("Jugador no encontrado en la partida"))
+                    {
+                        CancelarPartida();
+                    } else if (turno < 4 && partidaResponse.Respuesta == null)
                     {
                         int indiceCarta;
-                        for(int i = 0; i < pictureBoxesEscenarios.Count; i++)
+                        for (int i = 0; i < pictureBoxesEscenarios.Count; i++)
                         {
-                            for(int y = 0; y < partidaResponse.listaMovimientos.Count; y++)
+                            for (int y = 0; y < partidaResponse.listaMovimientos.Count; y++)
                             {
-                                if ( (int) pictureBoxesEscenarios[i].Tag == partidaResponse.listaMovimientos[y].IDEscenario)
+                                if ((int)pictureBoxesEscenarios[i].Tag == partidaResponse.listaMovimientos[y].IDEscenario)
                                 {
                                     indiceCarta = cartas.FindIndex(x => x.IDCarta == partidaResponse.listaMovimientos[y].IDCarta);
-                                    pictureBoxesTableroOponente[i].Image = ConvertidorImagen.DeBase64AImagen( cartas[indiceCarta].Imagen );
+                                    pictureBoxesTableroOponente[i].Image = ConvertidorImagen.DeBase64AImagen(cartas[indiceCarta].Imagen);
                                     labelsPoderOponente[i].Text = cartas[indiceCarta].Poder.ToString();
                                     break;
                                 }
@@ -162,15 +175,15 @@ namespace FEI_Tactics.Forms
                 if(totalMisPuntos > totalPuntosOponente)
                 {
                     Mensaje.MostrarMensaje("¡Has ganado!", "¡Felicidades!", MessageBoxIcon.Exclamation);
-                    CancelarPartida();
+                    this.Close();
                 } else if(totalMisPuntos < totalPuntosOponente)
                 {
                     Mensaje.MostrarMensaje("Has perdido", "Suerte la próxima vez", MessageBoxIcon.Exclamation);
-                    CancelarPartida();
-                }else if(totalMisPuntos == totalPuntosOponente)
+                    this.Close();
+                } else if(totalMisPuntos == totalPuntosOponente)
                 {
                     Mensaje.MostrarMensaje("¡Empate!", "¡Reñido!", MessageBoxIcon.Exclamation);
-                    CancelarPartida();
+                    this.Close();
                 }
             }
 
@@ -185,12 +198,11 @@ namespace FEI_Tactics.Forms
 
                 if (respuestaAbandonarPartida.Equals("Partida cancelada correctamente"))
                 {
-                    buttonAbandonarPartida.Enabled = false;
-                    buttonTerminarTurno.Enabled = false;
+                    Mensaje.MostrarMensaje("Has perdido", "Suerte la próxima vez", MessageBoxIcon.Exclamation);
                     this.Close();
                 } else
                 {
-                    Mensaje.MostrarMensaje("Jugador no encontrado en la partida. No se pudo cancelar.", "Jugador no encontrado", MessageBoxIcon.Error);
+                    Mensaje.MostrarMensaje("¡Has ganado!", "¡Felicidades!", MessageBoxIcon.Exclamation);
                     this.Close();
                 }
             } catch (Exception ex)
