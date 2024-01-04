@@ -24,10 +24,53 @@ namespace FEI_Tactics.Forms
             InitializeComponent();
         }
 
-        private void BusquedaInvitado_Load(object sender, EventArgs e)
+        private async void BusquedaInvitado_Load(object sender, EventArgs e)
         {
             int numeroAleatorio = random.Next(1, 1000);
             Gamertag = "guest" + numeroAleatorio.ToString();
+            buttonCancelar.Enabled = true;
+
+            try
+            {
+                MatchMakingResponse respuestaSolicitudPartida;
+                buttonBuscarPartida.Visible = false;
+                buttonCancelar.Visible = true;
+                int cicloBusqueda = 0;
+
+                do
+                {
+                    if (cicloBusqueda == 5)
+                    {
+                        metodoCancelarBusqueda();
+                    }
+                    if (cancelarBusquedaInvitado)
+                    {
+                        buttonBuscarPartida.Visible = true;
+                        cancelarBusquedaInvitado = false;
+                        return;
+                    }
+                    respuestaSolicitudPartida = await MatchMakingService.SolicitarPartidaAsync(Gamertag);
+                    cicloBusqueda++;
+                } while (respuestaSolicitudPartida.Respuesta != null && (respuestaSolicitudPartida.Respuesta.Equals("Ya se solicitó la partida") ||
+                    respuestaSolicitudPartida.Respuesta.Equals("Solicitud Guardada") || respuestaSolicitudPartida.Respuesta.Equals("Partida Creada")));
+
+                if (!respuestaSolicitudPartida.Gamertag.Equals(Gamertag))
+                {
+                    buttonCancelar.Visible = false;
+                    buttonBuscarPartida.Visible = true;
+
+                    Partida partida = new Partida(respuestaSolicitudPartida.Gamertag, Gamertag);
+                    DialogResult result = partida.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        this.Close();
+                    }
+                }
+            } catch (Exception ex)
+            {
+                Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
+            }
         }
 
         private async void btnBuscarPartida(object sender, EventArgs e)
@@ -88,8 +131,7 @@ namespace FEI_Tactics.Forms
 
                 if (respuestaCancelarBusqueda.Equals("Jugador eliminado correctamente"))
                 {
-                    cancelarBusquedaInvitado = true;
-                    buttonCancelar.Visible = false;
+                    this.Close();
                 }
             } catch (Exception ex)
             {

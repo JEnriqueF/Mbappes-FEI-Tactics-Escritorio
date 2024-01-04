@@ -50,6 +50,9 @@ namespace FEI_Tactics.Forms
                 RecuperarEscenariosInfoAsync().ContinueWith(t =>
                 {
                     CargarImagenesEscenarios();
+                    buttonAbandonarPartida.Enabled = true;
+                    buttonTerminarTurno.Enabled = true;
+                    lbOponente.Text = gamertagOponente;
                     CargarMazo();
                 }, TaskScheduler.FromCurrentSynchronizationContext());
             } else
@@ -63,6 +66,8 @@ namespace FEI_Tactics.Forms
                 .ContinueWith(t =>
                 {
                     CargarImagenesEscenarios();
+                    buttonAbandonarPartida.Enabled = true;
+                    buttonTerminarTurno.Enabled = true;
                     CargarMazo();
                 }, TaskScheduler.FromCurrentSynchronizationContext());
             }
@@ -366,17 +371,19 @@ namespace FEI_Tactics.Forms
             }
         }
 
-        public void CargarMazo()
+        public async void CargarMazo()
         {
             if (gamertagInvitado.StartsWith("guest"))
             {
                 numerosMazo = new int[] {9,10,11,12};
+                cartas = await CartasService.RecuperarMazoAsync();
             } else
             {
                 numerosMazo = Jugador.Instancia.Mazo.Split(',').Select(s => Convert.ToInt32(s.Trim())).ToArray();
+                cartas = Carta.Instancia;
             }
             int indiceNumerosMazo = 0;
-            cartas = Carta.Instancia;
+            //cartas = Carta.Instancia;
             int indiceCarta = 0;
 
             int[] idCartas = new int[cartas.Count];

@@ -124,6 +124,7 @@ namespace FEI_Tactics
             Forms.RegistroCuenta registroCuenta = new Forms.RegistroCuenta();
             this.Hide();
             registroCuenta.Show();
+            registroCuenta.FormClosing += formClosing;
         }
 
         private void jugarInvitado(object sender, EventArgs e)
@@ -131,6 +132,7 @@ namespace FEI_Tactics
             Forms.BusquedaInvitado busqueda = new Forms.BusquedaInvitado();
             this.Hide();
             busqueda.Show();
+            busqueda.FormClosing += formClosing;
         }
     }
 }
