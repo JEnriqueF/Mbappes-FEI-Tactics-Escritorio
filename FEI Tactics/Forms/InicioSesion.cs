@@ -62,7 +62,7 @@ namespace FEI_Tactics
         {
             tbGamertag.Text = "";
             tbContrasenia.Text = "";
-            this.Close();
+            this.Show();
         }
 
         private async void clicBtnIniciarSesion(object sender, EventArgs e)
@@ -124,6 +124,13 @@ namespace FEI_Tactics
             Forms.RegistroCuenta registroCuenta = new Forms.RegistroCuenta();
             this.Hide();
             registroCuenta.Show();
+        }
+
+        private void jugarInvitado(object sender, EventArgs e)
+        {
+            Forms.BusquedaInvitado busqueda = new Forms.BusquedaInvitado();
+            this.Hide();
+            busqueda.Show();
         }
     }
 }

@@ -95,7 +95,6 @@ namespace FEI_Tactics.Services
             }
         }
 
-        //TEST
         public static async Task<string> CancelarPartidaAsync(string gamerTag)
         {
             try
@@ -126,6 +125,39 @@ namespace FEI_Tactics.Services
                 }
             }
             catch (Exception ex)
+            {
+                throw new Exception("Fallo en la conexión al servidor.", ex);
+            }
+        }
+
+        public static async Task<string> GuardarResultadoAsync(string gamertag, int resultado)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var requestData = new
+                    {
+                        Gamertag = gamertag,
+                        Resultado = resultado
+                    };
+
+                    string jsonData = JsonConvert.SerializeObject(requestData);
+                    StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PostAsync($"{URL_API}matchmaking/guardarresultado", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseJson = await response.Content.ReadAsStringAsync();
+                        
+                        var responseObj = JsonConvert.DeserializeObject<MatchMakingResponse>(responseJson);
+                        return responseObj.Respuesta;
+                    } else
+                    {
+                        throw new HttpRequestException($"{response.StatusCode} - {response.ReasonPhrase}");
+                    }
+                }
+            } catch (HttpRequestException ex)
             {
                 throw new Exception("Fallo en la conexión al servidor.", ex);
             }

@@ -86,16 +86,12 @@ namespace FEI_Tactics.Forms
             {
                 if(Mensaje.MostrarMensajeConfirmacionRegresar())
                 {
-                    InicioSesion inicioSesion = new InicioSesion();
                     this.Close();
-                    inicioSesion.Show();
                 }
             }
             else
             {
-                InicioSesion inicioSesion = new InicioSesion();
                 this.Close();
-                inicioSesion.Show();
             }
         }
 

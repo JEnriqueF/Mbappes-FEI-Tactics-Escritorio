@@ -102,6 +102,7 @@
             this.buttonInvitado.TabIndex = 6;
             this.buttonInvitado.Text = "Jugar como invitado";
             this.buttonInvitado.UseVisualStyleBackColor = true;
+            this.buttonInvitado.Click += new System.EventHandler(this.jugarInvitado);
             // 
             // labelTitulo
             // 

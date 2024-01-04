@@ -17,7 +17,6 @@ namespace FEI_Tactics.Forms
     {
         JugadorResponse oponente;
         FotoPerfilResponse fotoPerfilOponente;
-        List<Escenario> escenariosPartidaInfo;
         string gamertagOponente;
         List<Escenario> escenarios;
         List<PictureBox> pictureBoxesMazo = new List<PictureBox>();
@@ -32,30 +31,41 @@ namespace FEI_Tactics.Forms
         int energia = 0;
         int turno = 1;
         int costoCartaRemovida = 0;
+        string gamertagInvitado;
+        string respuestaAbandonarPartida;
+        int[] numerosMazo;
 
-        public Partida(string gamertagOponente)
+        public Partida(string gamertagOponente, string gamertagInvitado)
         {
             InitializeComponent();
             this.gamertagOponente = gamertagOponente;
+            this.gamertagInvitado = gamertagInvitado;
             EstablecerOrdenEjecucion();
         }
 
         private void EstablecerOrdenEjecucion()
         {
-            ObtenerDatosOponente(gamertagOponente)
-            .ContinueWith(t =>
+            if (gamertagOponente.StartsWith("guest"))
             {
-                return RecuperarEscenariosInfoAsync();
-            }, TaskScheduler.FromCurrentSynchronizationContext())
-            .Unwrap()
-            .ContinueWith(t =>
+                RecuperarEscenariosInfoAsync().ContinueWith(t =>
+                {
+                    CargarImagenesEscenarios();
+                    CargarMazo();
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            } else
             {
-                CargarImagenesEscenarios();
-                buttonTerminarTurno.Enabled = true;
-                buttonAbandonarPartida.Enabled = true;
-                VerificarFotosObtenidas();
-                CargarMazo();
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+                ObtenerDatosOponente(gamertagOponente)
+                .ContinueWith(t =>
+                {
+                    return RecuperarEscenariosInfoAsync();
+                }, TaskScheduler.FromCurrentSynchronizationContext())
+                .Unwrap()
+                .ContinueWith(t =>
+                {
+                    CargarImagenesEscenarios();
+                    CargarMazo();
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            }
         }
 
         private void buttonAbandonarPartida_Click(object sender, EventArgs e)
@@ -125,7 +135,14 @@ namespace FEI_Tactics.Forms
                         CancelarPartida();
                     }
 
-                    partidaResponse = await PartidaService.MandarMovimientosAsync(Jugador.Instancia.Gamertag, listaMovimientos);
+                    if (gamertagInvitado.StartsWith("guest"))
+                    {
+                        partidaResponse = await PartidaService.MandarMovimientosAsync(gamertagInvitado, listaMovimientos);
+                    } else
+                    {
+                        partidaResponse = await PartidaService.MandarMovimientosAsync(Jugador.Instancia.Gamertag, listaMovimientos);
+                    }
+
                     await Task.Delay(5000);
 
                     if (turno < 4 && partidaResponse.Respuesta != null && !partidaResponse.Respuesta.Equals("Jugador no encontrado en la partida"))
@@ -154,12 +171,8 @@ namespace FEI_Tactics.Forms
                 } while (partidaResponse.Respuesta != null && (partidaResponse.Respuesta.Equals("Ya se jugó un movimiento para Jugador en este turno") || 
                         !partidaResponse.Respuesta.Equals("Jugador no encontrado en la partida") || partidaResponse.Respuesta.Equals("Turno Jugado")));
 
-                turno++;
-
                 energia += 2;
                 lbEnergia.Text = energia.ToString();
-
-                Mensaje.MostrarMensaje("Turno jugado.", "Jugado", MessageBoxIcon.Information);
             } catch (Exception ex)
             {
                 Mensaje.MostrarMensaje($"{ex.Message}", "Conexión con el servidor no establecida", MessageBoxIcon.Error);
@@ -174,18 +187,36 @@ namespace FEI_Tactics.Forms
 
                 if(totalMisPuntos > totalPuntosOponente)
                 {
-                    Mensaje.MostrarMensaje("¡Has ganado!", "¡Felicidades!", MessageBoxIcon.Exclamation);
-                    this.Close();
+                    if (gamertagInvitado.StartsWith("guest"))
+                    {
+                        Mensaje.MostrarMensaje("¡Has ganado!", "¡Felicidades!", MessageBoxIcon.Exclamation);
+                        DialogResult = DialogResult.OK;
+                        this.Close();
+                    } else
+                    {
+                        GuardarResultado(1);
+                    }
                 } else if(totalMisPuntos < totalPuntosOponente)
                 {
-                    Mensaje.MostrarMensaje("Has perdido", "Suerte la próxima vez", MessageBoxIcon.Exclamation);
-                    this.Close();
+                    if (gamertagInvitado.StartsWith("guest"))
+                    {
+                        Mensaje.MostrarMensaje("Has perdido", "Suerte la próxima vez", MessageBoxIcon.Exclamation);
+                        DialogResult = DialogResult.OK;
+                        this.Close();
+                    } else
+                    {
+                        GuardarResultado(0);
+                    }
                 } else if(totalMisPuntos == totalPuntosOponente)
                 {
                     Mensaje.MostrarMensaje("¡Empate!", "¡Reñido!", MessageBoxIcon.Exclamation);
+                    DialogResult = DialogResult.Abort;
                     this.Close();
                 }
             }
+
+            turno++;
+            lbTurno.Text = turno.ToString();
 
             buttonTerminarTurno.Enabled = true;
         }
@@ -194,16 +225,32 @@ namespace FEI_Tactics.Forms
         {
             try
             {
-                string respuestaAbandonarPartida = await MatchMakingService.CancelarPartidaAsync(Jugador.Instancia.Gamertag);
-
-                if (respuestaAbandonarPartida.Equals("Partida cancelada correctamente"))
+                if (gamertagInvitado.StartsWith("guest"))
                 {
-                    Mensaje.MostrarMensaje("Has perdido", "Suerte la próxima vez", MessageBoxIcon.Exclamation);
-                    this.Close();
+                    respuestaAbandonarPartida = await MatchMakingService.CancelarPartidaAsync(gamertagInvitado);
+
+                    if (respuestaAbandonarPartida.Equals("Partida cancelada correctamente"))
+                    {
+                        Mensaje.MostrarMensaje("Has perdido", "Suerte la próxima vez", MessageBoxIcon.Exclamation);
+                        DialogResult = DialogResult.OK;
+                        this.Close();
+                    } else
+                    {
+                        Mensaje.MostrarMensaje("¡Has ganado!", "¡Felicidades!", MessageBoxIcon.Exclamation);
+                        DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
                 } else
                 {
-                    Mensaje.MostrarMensaje("¡Has ganado!", "¡Felicidades!", MessageBoxIcon.Exclamation);
-                    this.Close();
+                    respuestaAbandonarPartida = await MatchMakingService.CancelarPartidaAsync(Jugador.Instancia.Gamertag);
+
+                    if (respuestaAbandonarPartida.Equals("Partida cancelada correctamente"))
+                    {
+                        GuardarResultado(0);
+                    } else
+                    {
+                        GuardarResultado(1);
+                    }
                 }
             } catch (Exception ex)
             {
@@ -211,12 +258,34 @@ namespace FEI_Tactics.Forms
             }
         }
 
-        private void VerificarFotosObtenidas()
+        private async void GuardarResultado(int resultado)
         {
-            if (escenariosPartidaInfo == null)
+            if(resultado == 1)
             {
-                buttonTerminarTurno.Enabled = true;
-                buttonAbandonarPartida.Enabled = true;
+                string respuesta = await MatchMakingService.GuardarResultadoAsync(Jugador.Instancia.Gamertag, 1);
+
+                if (respuesta.Equals("Resultados Guardados"))
+                {
+                    Mensaje.MostrarMensaje("¡Has ganado!", "¡Felicidades!", MessageBoxIcon.Exclamation);
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                } else
+                {
+                    Mensaje.MostrarMensaje("No se pudo guardar el resultado", "Error", MessageBoxIcon.Error);
+                }
+            }else if(resultado == 0)
+            {
+                string respuesta = await MatchMakingService.GuardarResultadoAsync(Jugador.Instancia.Gamertag, 0);
+
+                if (respuesta.Equals("Resultados Guardados"))
+                {
+                    Mensaje.MostrarMensaje("Has perdido", "Suerte la próxima vez", MessageBoxIcon.Exclamation);
+                    DialogResult = DialogResult.Cancel;
+                    this.Close();
+                } else
+                {
+                    Mensaje.MostrarMensaje("No se pudo guardar el resultado", "Error", MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -299,7 +368,13 @@ namespace FEI_Tactics.Forms
 
         public void CargarMazo()
         {
-            int[] numerosMazo = Jugador.Instancia.Mazo.Split(',').Select(s => Convert.ToInt32(s.Trim())).ToArray();
+            if (gamertagInvitado.StartsWith("guest"))
+            {
+                numerosMazo = new int[] {9,10,11,12};
+            } else
+            {
+                numerosMazo = Jugador.Instancia.Mazo.Split(',').Select(s => Convert.ToInt32(s.Trim())).ToArray();
+            }
             int indiceNumerosMazo = 0;
             cartas = Carta.Instancia;
             int indiceCarta = 0;
@@ -352,24 +427,40 @@ namespace FEI_Tactics.Forms
                 controladorIdCarta++;
             }
 
-            foreach(int numero in idCartas)
+            if (gamertagInvitado.StartsWith("guest"))
             {
-                if (Jugador.Instancia.Mazo.Contains(numero.ToString()) && numero != 0)
+                int i = 0;
+                foreach(int numero in numerosMazo)
                 {
-                    indiceNumerosMazo = Array.IndexOf(numerosMazo, numero);
-                    indiceCarta = cartas.FindIndex(x => x.IDCarta == numero);
+                    pictureBoxesMazo[i].Image = ConvertidorImagen.DeBase64AImagen(cartas[i].Imagen);
+                    labelsCartasMazo[i].Text = numero.ToString();
+                    pictureBoxesMazo[i].Tag = cartas[i].Costo;
+                    labelsPoder[i].Text = cartas[i].Poder.ToString();
 
-                    pictureBoxesMazo[indiceNumerosMazo].Image = ConvertidorImagen.DeBase64AImagen(cartas[indiceCarta].Imagen);
-                    labelsCartasMazo[indiceNumerosMazo].Text = numero.ToString();
-                    pictureBoxesMazo[indiceNumerosMazo].Tag = cartas[indiceCarta].Costo;
-                    labelsPoder[indiceNumerosMazo].Text = cartas[indiceCarta].Poder.ToString();
+                    i++;
+                }
+            } else
+            {
+                foreach (int numero in idCartas)
+                {
+                    if (Jugador.Instancia.Mazo.Contains(numero.ToString()) && numero != 0)
+                    {
+                        indiceNumerosMazo = Array.IndexOf(numerosMazo, numero);
+                        indiceCarta = cartas.FindIndex(x => x.IDCarta == numero);
 
-                    numerosMazo[indiceNumerosMazo] = 0;
+                        pictureBoxesMazo[indiceNumerosMazo].Image = ConvertidorImagen.DeBase64AImagen(cartas[indiceCarta].Imagen);
+                        labelsCartasMazo[indiceNumerosMazo].Text = numero.ToString();
+                        pictureBoxesMazo[indiceNumerosMazo].Tag = cartas[indiceCarta].Costo;
+                        labelsPoder[indiceNumerosMazo].Text = cartas[indiceCarta].Poder.ToString();
+
+                        numerosMazo[indiceNumerosMazo] = 0;
+                    }
                 }
             }
 
             energia = 2;
             lbEnergia.Text = energia.ToString();
+            lbTurno.Text = turno.ToString();
         }
 
         private void insertarCarta1(object sender, EventArgs e)

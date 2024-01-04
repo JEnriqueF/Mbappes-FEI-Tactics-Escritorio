@@ -2,6 +2,7 @@
 using FEI_Tactics.Models;
 using FEI_Tactics.Services;
 using FEI_Tactics.Utilities;
+using FontAwesome.Sharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,8 +91,17 @@ namespace FEI_Tactics
                 {
                     buttonCancelar.Visible = false;
                     buttonBuscarPartida.Visible = true;
-                    Partida partida = new Partida(respuestaSolicitudPartida.Gamertag);
-                    partida.Show();
+
+                    Partida partida = new Partida(respuestaSolicitudPartida.Gamertag, "");
+                    DialogResult result = partida.ShowDialog();
+
+                    if(result == DialogResult.OK)
+                    {
+                        Jugador.ActualizarPartidasGanadas();
+                    }else if (result == DialogResult.Cancel)
+                    {
+                        Jugador.ActualizarPartidasPerdidas();
+                    }
                 }
             }
             catch (Exception ex)

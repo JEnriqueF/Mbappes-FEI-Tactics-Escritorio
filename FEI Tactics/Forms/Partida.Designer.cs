@@ -66,6 +66,8 @@
             this.lbPoder2 = new System.Windows.Forms.Label();
             this.lbPoder3 = new System.Windows.Forms.Label();
             this.lbPoder4 = new System.Windows.Forms.Label();
+            this.lbTurno = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbFotoPerfilEnemigo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMiCarta4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMiCarta2)).BeginInit();
@@ -283,6 +285,7 @@
             this.lbMiCarta1.Size = new System.Drawing.Size(14, 16);
             this.lbMiCarta1.TabIndex = 19;
             this.lbMiCarta1.Text = "0";
+            this.lbMiCarta1.Visible = false;
             // 
             // lbMiCarta2
             // 
@@ -292,6 +295,7 @@
             this.lbMiCarta2.Size = new System.Drawing.Size(14, 16);
             this.lbMiCarta2.TabIndex = 20;
             this.lbMiCarta2.Text = "0";
+            this.lbMiCarta2.Visible = false;
             // 
             // lbMiCarta3
             // 
@@ -301,6 +305,7 @@
             this.lbMiCarta3.Size = new System.Drawing.Size(14, 16);
             this.lbMiCarta3.TabIndex = 21;
             this.lbMiCarta3.Text = "0";
+            this.lbMiCarta3.Visible = false;
             // 
             // lbCartaMazo4
             // 
@@ -310,6 +315,7 @@
             this.lbCartaMazo4.Size = new System.Drawing.Size(44, 16);
             this.lbCartaMazo4.TabIndex = 22;
             this.lbCartaMazo4.Text = "label1";
+            this.lbCartaMazo4.Visible = false;
             // 
             // lbCartaMazo3
             // 
@@ -319,6 +325,7 @@
             this.lbCartaMazo3.Size = new System.Drawing.Size(44, 16);
             this.lbCartaMazo3.TabIndex = 23;
             this.lbCartaMazo3.Text = "label1";
+            this.lbCartaMazo3.Visible = false;
             // 
             // lbCartaMazo2
             // 
@@ -328,6 +335,7 @@
             this.lbCartaMazo2.Size = new System.Drawing.Size(44, 16);
             this.lbCartaMazo2.TabIndex = 24;
             this.lbCartaMazo2.Text = "label1";
+            this.lbCartaMazo2.Visible = false;
             // 
             // lbCartaMazo1
             // 
@@ -337,6 +345,7 @@
             this.lbCartaMazo1.Size = new System.Drawing.Size(44, 16);
             this.lbCartaMazo1.TabIndex = 25;
             this.lbCartaMazo1.Text = "label1";
+            this.lbCartaMazo1.Visible = false;
             // 
             // label1
             // 
@@ -420,6 +429,7 @@
             this.lbPoder1.Size = new System.Drawing.Size(44, 16);
             this.lbPoder1.TabIndex = 34;
             this.lbPoder1.Text = "label1";
+            this.lbPoder1.Visible = false;
             // 
             // lbPoder2
             // 
@@ -429,6 +439,7 @@
             this.lbPoder2.Size = new System.Drawing.Size(44, 16);
             this.lbPoder2.TabIndex = 35;
             this.lbPoder2.Text = "label1";
+            this.lbPoder2.Visible = false;
             // 
             // lbPoder3
             // 
@@ -438,6 +449,7 @@
             this.lbPoder3.Size = new System.Drawing.Size(44, 16);
             this.lbPoder3.TabIndex = 36;
             this.lbPoder3.Text = "label1";
+            this.lbPoder3.Visible = false;
             // 
             // lbPoder4
             // 
@@ -447,11 +459,34 @@
             this.lbPoder4.Size = new System.Drawing.Size(44, 16);
             this.lbPoder4.TabIndex = 37;
             this.lbPoder4.Text = "label1";
+            this.lbPoder4.Visible = false;
+            // 
+            // lbTurno
+            // 
+            this.lbTurno.AutoSize = true;
+            this.lbTurno.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTurno.Location = new System.Drawing.Point(166, 680);
+            this.lbTurno.Name = "lbTurno";
+            this.lbTurno.Size = new System.Drawing.Size(15, 16);
+            this.lbTurno.TabIndex = 39;
+            this.lbTurno.Text = "0";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(95, 680);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 16);
+            this.label5.TabIndex = 38;
+            this.label5.Text = "TURNO:";
             // 
             // Partida
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(580, 705);
+            this.Controls.Add(this.lbTurno);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.lbPoder4);
             this.Controls.Add(this.lbPoder3);
             this.Controls.Add(this.lbPoder2);
@@ -490,6 +525,7 @@
             this.Controls.Add(this.pbMiCarta4);
             this.Controls.Add(this.pbFotoPerfilEnemigo);
             this.Controls.Add(this.lbOponente);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Partida";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Partida";
@@ -552,5 +588,7 @@
         private System.Windows.Forms.Label lbPoder2;
         private System.Windows.Forms.Label lbPoder3;
         private System.Windows.Forms.Label lbPoder4;
+        private System.Windows.Forms.Label lbTurno;
+        private System.Windows.Forms.Label label5;
     }
 }

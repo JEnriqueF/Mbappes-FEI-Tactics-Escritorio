@@ -37,6 +37,16 @@ namespace FEI_Tactics
             Instancia.IdFoto = nuevaFotoPerfil;
         }
 
+        public static void ActualizarPartidasGanadas()
+        {
+            Instancia.PartidasGanadas++;
+        }
+
+        public static void ActualizarPartidasPerdidas()
+        {
+            Instancia.PartidasPerdidas++;
+        }
+
         public string Gamertag { get; set; }
         public string Contrasenia { get; set; }
         public int PartidasGanadas { get; set; }

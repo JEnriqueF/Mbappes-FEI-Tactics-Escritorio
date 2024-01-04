@@ -105,3 +105,4 @@ D:\Periodo_7\FEITACTICS\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI
 D:\Periodo_7\FEITACTICS\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.csproj.CopyComplete
 D:\Periodo_7\FEITACTICS\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.exe
 D:\Periodo_7\FEITACTICS\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI Tactics.pdb
+C:\Users\LENOVO\Documents\Desarrollo de sistemas en red\FEI Tactics Escritorio\FEI Tactics\Mbappes-FEI-Tactics-Escritorio\FEI Tactics\obj\Debug\FEI_Tactics.Forms.BusquedaInvitado.resources

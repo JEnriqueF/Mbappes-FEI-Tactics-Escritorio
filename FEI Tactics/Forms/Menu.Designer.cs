@@ -30,9 +30,9 @@
         {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.imMenuPrincipal = new FontAwesome.Sharp.IconMenuItem();
-            this.iconMenuItem3 = new FontAwesome.Sharp.IconMenuItem();
-            this.iconMenuItem4 = new FontAwesome.Sharp.IconMenuItem();
-            this.iconMenuItem5 = new FontAwesome.Sharp.IconMenuItem();
+            this.imMazo = new FontAwesome.Sharp.IconMenuItem();
+            this.imPerfil = new FontAwesome.Sharp.IconMenuItem();
+            this.imConfiguracion = new FontAwesome.Sharp.IconMenuItem();
             this.iconMenuItem1 = new FontAwesome.Sharp.IconMenuItem();
             this.contenedor = new System.Windows.Forms.Panel();
             this.menuStrip.SuspendLayout();
@@ -45,9 +45,9 @@
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.imMenuPrincipal,
-            this.iconMenuItem3,
-            this.iconMenuItem4,
-            this.iconMenuItem5});
+            this.imMazo,
+            this.imPerfil,
+            this.imConfiguracion});
             this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip.Location = new System.Drawing.Point(0, 659);
             this.menuStrip.Name = "menuStrip";
@@ -65,35 +65,35 @@
             this.imMenuPrincipal.Text = "Menu principal";
             this.imMenuPrincipal.Click += new System.EventHandler(this.menuPrincipal);
             // 
-            // iconMenuItem3
+            // imMazo
             // 
-            this.iconMenuItem3.IconChar = FontAwesome.Sharp.IconChar.Bolt;
-            this.iconMenuItem3.IconColor = System.Drawing.Color.Black;
-            this.iconMenuItem3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconMenuItem3.Name = "iconMenuItem3";
-            this.iconMenuItem3.Size = new System.Drawing.Size(80, 42);
-            this.iconMenuItem3.Text = "Mazo";
-            this.iconMenuItem3.Click += new System.EventHandler(this.mazo);
+            this.imMazo.IconChar = FontAwesome.Sharp.IconChar.Bolt;
+            this.imMazo.IconColor = System.Drawing.Color.Black;
+            this.imMazo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.imMazo.Name = "imMazo";
+            this.imMazo.Size = new System.Drawing.Size(80, 42);
+            this.imMazo.Text = "Mazo";
+            this.imMazo.Click += new System.EventHandler(this.mazo);
             // 
-            // iconMenuItem4
+            // imPerfil
             // 
-            this.iconMenuItem4.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
-            this.iconMenuItem4.IconColor = System.Drawing.Color.Black;
-            this.iconMenuItem4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconMenuItem4.Name = "iconMenuItem4";
-            this.iconMenuItem4.Size = new System.Drawing.Size(76, 42);
-            this.iconMenuItem4.Text = "Perfil";
-            this.iconMenuItem4.Click += new System.EventHandler(this.perfil);
+            this.imPerfil.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
+            this.imPerfil.IconColor = System.Drawing.Color.Black;
+            this.imPerfil.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.imPerfil.Name = "imPerfil";
+            this.imPerfil.Size = new System.Drawing.Size(76, 42);
+            this.imPerfil.Text = "Perfil";
+            this.imPerfil.Click += new System.EventHandler(this.perfil);
             // 
-            // iconMenuItem5
+            // imConfiguracion
             // 
-            this.iconMenuItem5.IconChar = FontAwesome.Sharp.IconChar.Gear;
-            this.iconMenuItem5.IconColor = System.Drawing.Color.Black;
-            this.iconMenuItem5.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconMenuItem5.Name = "iconMenuItem5";
-            this.iconMenuItem5.Size = new System.Drawing.Size(136, 42);
-            this.iconMenuItem5.Text = "Configuración";
-            this.iconMenuItem5.Click += new System.EventHandler(this.configuracion);
+            this.imConfiguracion.IconChar = FontAwesome.Sharp.IconChar.Gear;
+            this.imConfiguracion.IconColor = System.Drawing.Color.Black;
+            this.imConfiguracion.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.imConfiguracion.Name = "imConfiguracion";
+            this.imConfiguracion.Size = new System.Drawing.Size(136, 42);
+            this.imConfiguracion.Text = "Configuración";
+            this.imConfiguracion.Click += new System.EventHandler(this.configuracion);
             // 
             // iconMenuItem1
             // 
@@ -132,9 +132,9 @@
 
         private System.Windows.Forms.MenuStrip menuStrip;
         private FontAwesome.Sharp.IconMenuItem imMenuPrincipal;
-        private FontAwesome.Sharp.IconMenuItem iconMenuItem3;
-        private FontAwesome.Sharp.IconMenuItem iconMenuItem4;
-        private FontAwesome.Sharp.IconMenuItem iconMenuItem5;
+        private FontAwesome.Sharp.IconMenuItem imMazo;
+        private FontAwesome.Sharp.IconMenuItem imPerfil;
+        private FontAwesome.Sharp.IconMenuItem imConfiguracion;
         private FontAwesome.Sharp.IconMenuItem iconMenuItem1;
         private System.Windows.Forms.Panel contenedor;
     }
