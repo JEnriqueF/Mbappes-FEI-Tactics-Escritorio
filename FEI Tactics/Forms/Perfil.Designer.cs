@@ -39,6 +39,8 @@
             this.pbFotoDisponible3 = new System.Windows.Forms.PictureBox();
             this.pbFotoDisponible4 = new System.Windows.Forms.PictureBox();
             this.pbFotoDisponible5 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbPartidasPerdidas = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbFotoPerfil)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFotoDisponible1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbFotoDisponible2)).BeginInit();
@@ -163,11 +165,33 @@
             this.pbFotoDisponible5.TabStop = false;
             this.pbFotoDisponible5.Click += new System.EventHandler(this.pbFotoDisponible5_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(200, 489);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(135, 16);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Partidas perdidas:";
+            // 
+            // tbPartidasPerdidas
+            // 
+            this.tbPartidasPerdidas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbPartidasPerdidas.Enabled = false;
+            this.tbPartidasPerdidas.Location = new System.Drawing.Point(270, 508);
+            this.tbPartidasPerdidas.Name = "tbPartidasPerdidas";
+            this.tbPartidasPerdidas.Size = new System.Drawing.Size(40, 15);
+            this.tbPartidasPerdidas.TabIndex = 16;
+            this.tbPartidasPerdidas.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Perfil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 658);
+            this.Controls.Add(this.tbPartidasPerdidas);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pbFotoDisponible5);
             this.Controls.Add(this.pbFotoDisponible4);
             this.Controls.Add(this.pbFotoDisponible3);
@@ -206,5 +230,7 @@
         private System.Windows.Forms.PictureBox pbFotoDisponible3;
         private System.Windows.Forms.PictureBox pbFotoDisponible4;
         private System.Windows.Forms.PictureBox pbFotoDisponible5;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbPartidasPerdidas;
     }
 }

@@ -175,6 +175,7 @@ namespace FEI_Tactics
         {
             lbGamertag.Text = Jugador.Instancia.Gamertag;
             tbPartidasGanadas.Text = Jugador.Instancia.PartidasGanadas.ToString();
+            tbPartidasPerdidas.Text = Jugador.Instancia.PartidasPerdidas.ToString();
             if (fotoActual != null)
             {
                 pbFotoPerfil.Image = fotoActual.Foto;
